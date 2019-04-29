@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../../res/admin/css/bgimg.css" >
+		<link rel="stylesheet" href="../../res/admin/lib/layui/css/layui.css">
+	</head>
+	<body>
+		<div id="bgimg" class="container">
+			<div class="div1" >
+				<div class="div2"><i class="layui-icon">&#xe67c;</i>点击上传</div>
+				<input type="file" @change="uploadFile" id="file" name="file"  class="file_input">
+			</div>
+	     	<div class="img-box">
+				<div v-for="(item, index) in img" class="img-div">
+				    <img :src="item.url" v-on:click="previewImg(item.url)">
+					<span  class="delete" v-on:click="deleteimg(item.id, index)" >×</span>
+				</div>
+				<!--<div class="img-div">-->
+					<!--<img src="https://b4-q.mafengwo.net/s13/M00/2A/0F/wKgEaVx_43WAAMppAAdcuRENk8416.jpeg?imageMogr2%2Finterlace%2F1" onclick="previewImg(this)" @mouseenter="imgmouse(1)">-->
+					<!--<span class="delete" @click="showFiguredelete(index)">×</span>-->
+				<!--</div>-->
+				<!--<div class="img-div">-->
+					<!--<img src="https://b4-q.mafengwo.net/s13/M00/2A/0F/wKgEaVx_43WAAMppAAdcuRENk8416.jpeg?imageMogr2%2Finterlace%2F1" onclick="previewImg(this)" @mouseenter="imgmouse(1)">-->
+				<!--</div>-->
+				<!--<div class="img-div">-->
+					<!--<img src="https://b4-q.mafengwo.net/s13/M00/2A/0F/wKgEaVx_43WAAMppAAdcuRENk8416.jpeg?imageMogr2%2Finterlace%2F1" onclick="previewImg(this)" @mouseenter="imgmouse(1)">-->
+				<!--</div>-->
+				<!--<div class="img-div">-->
+					<!--<img src="https://b4-q.mafengwo.net/s13/M00/2A/0F/wKgEaVx_43WAAMppAAdcuRENk8416.jpeg?imageMogr2%2Finterlace%2F1" onclick="previewImg(this)" @mouseenter="imgmouse(1)">-->
+				<!--</div>-->
+			</div>
+		</div>
+		
+		<script src="../../res/common/js/jquery.min.js"></script>
+		<script src="../../res/common/js/vue.min.js"></script>
+		<script src="../../res/admin/lib/layui/layui.js"></script>
+		<script src="../../res/admin/js/bgimg.js"></script>
+
+	</body>
+</html>

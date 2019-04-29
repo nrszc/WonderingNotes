@@ -1,0 +1,12 @@
+body{
+	font-family: Arial,"Lucida Grande","Microsoft Yahei","Hiragino Sans GB","Hiragino Sans GB W3",SimSun,"PingFang SC",STHeiti;
+	margin: 0;
+	padding: 0;
+}
+
+.avatar-container{
+	margin: 0 auto;
+	padding-bottom: 20px;
+	width: 1000px;
+	min-height: 100%;
+}

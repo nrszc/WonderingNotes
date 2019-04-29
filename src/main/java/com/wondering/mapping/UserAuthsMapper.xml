@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wondering.dao.UserAuthsMapper">
+  <resultMap id="BaseResultMap" type="com.wondering.pojo.UserAuths">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="identity_type" jdbcType="TINYINT" property="identity_type" />
+    <result column="identifier" jdbcType="VARCHAR" property="identifier" />
+    <result column="credential" jdbcType="VARCHAR" property="credential" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, identity_type, identifier, credential, create_time, update_time, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user_auths
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_user_auths
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wondering.pojo.UserAuths">
+    insert into tbl_user_auths (id, user_id, identity_type, 
+      identifier, credential, create_time, 
+      update_time, status)
+    values (#{id,jdbcType=INTEGER}, #{user_id,jdbcType=INTEGER}, #{identity_type,jdbcType=TINYINT},
+      #{identifier,jdbcType=VARCHAR}, #{credential,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP},
+      #{update_time,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wondering.pojo.UserAuths">
+    insert into tbl_user_auths
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="identity_type != null">
+        identity_type,
+      </if>
+      <if test="identifier != null">
+        identifier,
+      </if>
+      <if test="credential != null">
+        credential,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="update_time != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="identity_type != null">
+        #{identity_type,jdbcType=TINYINT},
+      </if>
+      <if test="identifier != null">
+        #{identifier,jdbcType=VARCHAR},
+      </if>
+      <if test="credential != null">
+        #{credential,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null">
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wondering.pojo.UserAuths">
+    update tbl_user_auths
+    <set>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="identity_type != null">
+        identity_type = #{identity_type,jdbcType=TINYINT},
+      </if>
+      <if test="identifier != null">
+        identifier = #{identifier,jdbcType=VARCHAR},
+      </if>
+      <if test="credential != null">
+        credential = #{credential,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null">
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wondering.pojo.UserAuths">
+    update tbl_user_auths
+    set user_id = #{user_id,jdbcType=INTEGER},
+      identity_type = #{identity_type,jdbcType=TINYINT},
+      identifier = #{identifier,jdbcType=VARCHAR},
+      credential = #{credential,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- 新增方法:查看是否存在该手机号注册用户-->
+  <select id="check" resultType="int" >
+    select COUNT(1)
+    from tbl_user_auths
+    where identifier = #{identifier} and status = #{status} and identity_type=#{identity_type}
+  </select>
+
+  <!--插入一条UserAuths信息-->
+  <insert id="InsertUserAuths" parameterType="com.wondering.pojo.UserAuths">
+    insert into tbl_user_auths (user_id, identity_type,
+      identifier, credential, create_time,
+      update_time)
+    values (#{user_id}, #{identity_type},
+      #{identifier}, #{credential}, now(),
+      now())
+  </insert>
+
+  <!--密码登录以及获取账号信息-->
+  <select id="LoginByPW" resultType="com.wondering.vo.UserInfo">
+    select b.id as user_auths_id, a.id as user_id, nickname, avatar, sex, b.status as status,b.identity_type as identity_type
+    from tbl_user a, tbl_user_auths b
+    where identity_type = #{identity_type} and identifier=#{identifier} and credential=#{credential} and b.user_id=a.id
+  </select>
+
+  <!--验证码登录以及获取账号信息-->
+  <select id="LoginByCode" resultType="com.wondering.vo.UserInfo">
+    select b.id as user_auths_id, a.id as user_id, nickname, avatar, sex, b.status as status, b.identity_type as identity_type
+    from tbl_user a, tbl_user_auths b
+    where identity_type = #{identity_type} and identifier=#{identifier} and b.user_id=a.id
+  </select>
+
+  <!--第三方登录以及获取账号信息-->
+  <select id="getUserInfo" resultType="com.wondering.vo.UserInfo">
+    select b.id as user_auths_id, a.id as user_id, nickname, avatar, sex, b.status as status,b.identity_type as identity_type
+    from tbl_user a, tbl_user_auths b
+    where identity_type = #{identity_type} and identifier=#{identifier} and b.user_id=a.id
+  </select>
+
+  <!-- 更改密码-->
+  <update id="updatepwd" parameterType="com.wondering.pojo.UserAuths">
+    update tbl_user_auths
+    set credential = #{credential}
+    where identifier = #{identifier}
+  </update>
+
+  <!--未登录查询（别人的）关注-->
+  <select id="getUpdateUser" resultType="com.wondering.vo.UserInfo">
+    select identity_type,user_id,identifier
+    from tbl_user_auths
+    where user_id = #{user_id}
+  </select>
+
+</mapper>

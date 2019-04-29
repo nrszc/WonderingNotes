@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="../../res/layui/css/layui.css" />
+	<link rel="stylesheet" href="../../res/font-awesome/css/font-awesome.min.css" >
+	<link rel="stylesheet" href="../../res/emoji/css/emojionearea.css">
+	<link rel="stylesheet" href="../../res/user/css/chat.css" />
+</head>
+<body>
+
+<div id="chat-container" class="chat-container">
+
+	<div class="title-box">
+		<p>与&nbsp;<strong>{{user1.nickname}}</strong>&nbsp;的对话</p>
+	</div>
+
+	<div id="chat-box" class="chat-box">
+		<template v-for="(m,index) in message">
+			<div v-if="m.from_user_id==from_user_id" class="fri-message-wrapper">
+				<a :href="'index.html?location=user&user_id='+user1.id" target= "_blank" class="avatar-img1">
+					<img v-if="user1.avatar==null||user1.avatar==''" height="55" width="55" src="../../res/user/images/avatar.png" >
+					<img v-else height="55" width="55" :src="user1.avatar" >
+				</a>
+				<div class="fri-message">
+					<span>{{m.content}}</span>
+				</div>
+			</div>
+			<div v-else class="my-message-wrapper1">
+				<div class="my-message-wrapper2">
+					<div class="my-message">
+						<span>{{m.content}}</span>
+					</div>
+					<a :href="'index.html?location=user&user_id='+user.id" target= "_blank" class="avatar-img2">
+						<img v-if="user.avatar==null||user.avatar==''" height="55" width="55" src="../../res/user/images/avatar.png" >
+						<img v-else height="55" width="55" :src="user.avatar" >
+					</a>
+				</div>
+			</div>
+			<div v-if="index===message.length-1" class="message-time">
+				<div class="time-box">{{m.create_time}}</div>
+			</div>
+		</template>
+	</div>
+
+	<div class="text-box">
+		<button v-on:click="send()" class="layui-btn layui-btn-sm send-btn"><i class="fa fa-send"></i>&nbsp;发送</button>
+		<textarea id="example1"></textarea>
+	</div>
+
+</div>
+
+
+<script src="../../res/common/js/jquery.min.js"></script>
+<script src="../../res/emoji/js/emojionearea.js"></script>
+<script src="http://cdn.bootcss.com/sockjs-client/1.1.1/sockjs.js"></script>
+<script src="../../res/user/js/chat.js"></script>
+</body>
+</html>

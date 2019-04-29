@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wondering.dao.SysNoticePrivateMapper">
+  <resultMap id="BaseResultMap" type="com.wondering.pojo.SysNoticePrivate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="admin_id" jdbcType="INTEGER" property="admin_id" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, content, create_time, user_id, admin_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_sysnotice_private
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_sysnotice_private
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wondering.pojo.SysNoticePrivate">
+    insert into tbl_sysnotice_private (id, content, create_time, 
+      user_id, admin_id)
+    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, 
+      #{user_id,jdbcType=INTEGER}, #{admin_id,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wondering.pojo.SysNoticePrivate">
+    insert into tbl_sysnotice_private
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="admin_id != null">
+        admin_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="admin_id != null">
+        #{admin_id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wondering.pojo.SysNoticePrivate">
+    update tbl_sysnotice_private
+    <set>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="admin_id != null">
+        admin_id = #{admin_id,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wondering.pojo.SysNoticePrivate">
+    update tbl_sysnotice_private
+    set content = #{content,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      user_id = #{user_id,jdbcType=INTEGER},
+      admin_id = #{admin_id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

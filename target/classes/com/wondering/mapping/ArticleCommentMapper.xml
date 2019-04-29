@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wondering.dao.ArticleCommentMapper">
+  <resultMap id="BaseResultMap" type="com.wondering.pojo.ArticleComment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="article_id" jdbcType="INTEGER" property="article_id" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="isread" jdbcType="TINYINT" property="isread" />
+    <result column="comment" jdbcType="INTEGER" property="comment" />
+    <result column="favor" jdbcType="INTEGER" property="favor" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, article_id, user_id, content, create_time, status, isread,comment,favor
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_article_comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_article_comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wondering.pojo.ArticleComment">
+    insert into tbl_article_comment (id, article_id, user_id, 
+      content, create_time, status, 
+      isread, comment, favor)
+    values (#{id,jdbcType=INTEGER}, #{article_id,jdbcType=INTEGER}, #{user_id,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{isread,jdbcType=TINYINT},#{comment,jdbcType=INTEGER},#{favor,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wondering.pojo.ArticleComment">
+    insert into tbl_article_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="article_id != null">
+        article_id,
+      </if>
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isread != null">
+        isread,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="favor != null">
+        favor,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="article_id != null">
+        #{article_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isread != null">
+        #{isread,jdbcType=TINYINT},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=INTEGER},
+      </if>
+      <if test="favor != null">
+        #{favor,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wondering.pojo.ArticleComment">
+    update tbl_article_comment
+    <set>
+      <if test="article_id != null">
+        article_id = #{article_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isread != null">
+        isread = #{isread,jdbcType=TINYINT},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=INTEGER},
+      </if>
+      <if test="favor != null">
+        favor = #{favor,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wondering.pojo.ArticleComment">
+    update tbl_article_comment
+    set article_id = #{article_id,jdbcType=INTEGER},
+      user_id = #{user_id,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      isread = #{isread,jdbcType=TINYINT},
+      comment = #{comment,jdbcType=INTEGER},
+      favor = #{favor,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--增加一条评论-->
+  <insert id="ToComment" parameterType="com.wondering.pojo.ArticleComment">
+    insert into tbl_article_comment (article_id, user_id, content, create_time)
+    values (#{article_id,jdbcType=INTEGER}, #{user_id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, now())
+  </insert>
+
+  <!--comment表comment+1-->
+  <update id="UpdateComment" >
+    update tbl_article
+    set comment = comment + 1
+    where id = #{id}
+  </update>
+
+  <!--获取游记评论-->
+  <select id="getCommment" resultType="com.wondering.vo.CommentVO">
+   select a.*, b.nickname, b.avatar
+   from tbl_article_comment a, tbl_user b
+   where a.article_id = #{articleid} and a.`status` = 0 and a.user_id = b.id
+   order by (favor+comment) desc
+  </select>
+
+  <!--获取游记评论-->
+  <select id="getCommment1" resultType="com.wondering.vo.CommentVO">
+    SELECT d.*,e.id as isfavor from
+    (select a.*, b.nickname, b.avatar
+    from tbl_article_comment a, tbl_user b
+    where a.article_id = #{articleid} and a.`status` = 0 and a.user_id = b.id ) d LEFT JOIN
+    (select id,user_id,comment_id from tbl_article_comment_favor c where c.user_id = #{user_id}) e on d.id = e.comment_id
+    order by (favor+comment) desc
+  </select>
+
+  <!--获取最新游记评论-->
+  <select id="getNewCommment" resultType="com.wondering.vo.CommentVO">
+   select a.*, b.nickname, b.avatar
+   from tbl_article_comment a, tbl_user b
+   where a.article_id = #{articleid} and a.`status` = 0 and a.user_id = b.id
+   order by a.create_time desc
+  </select>
+
+  <!--获取最新游记评论-->
+  <select id="getNewCommment1" resultType="com.wondering.vo.CommentVO">
+    SELECT d.*,e.id as isfavor from
+    (select a.*, b.nickname, b.avatar
+    from tbl_article_comment a, tbl_user b
+    where a.article_id = #{articleid} and a.`status` = 0 and a.user_id = b.id ) d LEFT JOIN
+    (select id,user_id,comment_id from tbl_article_comment_favor c where c.user_id = #{user_id}) e on d.id = e.comment_id
+    order by d.create_time desc
+  </select>
+
+  <!--获取最新游记评论-->
+  <select id="getReply" resultType="com.wondering.vo.CommentVO">
+    select a.*, b.nickname, c.id as reply_id, c.nickname as replyname
+    from tbl_article_comment_comment a, tbl_user b, tbl_user c
+    where a.comment_id = #{commentid} and a.`status` = 0 and a.user_id = b.id and a.reply_id = c.id
+    order by a.create_time
+  </select>
+
+  <!--comment表favor+1-->
+  <update id="UpFavorComment" >
+    update tbl_article_comment
+    set favor = favor + 1
+    where id = #{commentid}
+  </update>
+
+  <!--comment表favor-1-->
+  <update id="DownFavorComment" >
+    update tbl_article_comment
+    set favor = favor - 1
+    where id = #{commentid}
+  </update>
+
+  <!--增加一条comment_favor-->
+  <insert id="ToFavorComment">
+    insert into tbl_article_comment_favor (user_id, comment_id, create_time)
+    values (#{user_id,jdbcType=INTEGER}, #{commentid,jdbcType=INTEGER}, now())
+  </insert>
+
+  <!--删除一条comment_favor-->
+  <delete id="CancelFavorComment">
+     delete from tbl_article_comment_favor
+     where user_id = #{user_id} and comment_id = #{commentid}
+  </delete>
+
+  <!--comment表comment+1-->
+  <update id="UpdateArticleComment" >
+    update tbl_article_comment
+    set comment = comment + 1
+    where id = #{id}
+  </update>
+
+  <!--comment_comment增加一条评论-->
+  <insert id="ToReplyit" parameterType="com.wondering.pojo.CommentComment">
+    insert into tbl_article_comment_comment(user_id, content, create_time, reply_id, comment_id)
+    values (#{user_id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, now(), #{reply_id,jdbcType=INTEGER}, #{comment_id,jdbcType=INTEGER})
+  </insert>
+
+</mapper>

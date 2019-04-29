@@ -1,0 +1,64 @@
+.chart-box{
+	margin: 0 auto;
+	width: 1200px;
+}
+
+.count{
+	width: 650px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.user-sum-box{
+	float:left;
+	width: 300px;
+	height: 120px;
+	background-color: #6DB6E2;
+	border-radius: 3px;
+	/*color:#329DEA;*/
+	margin:20px 10px;
+}
+
+.note-sum-box{
+	float:left;
+	width: 300px;
+	height: 120px;
+	background-color: #329DEA;
+	border-radius: 3px;
+	/*color:#329DEA;*/
+	margin:20px 10px;
+}
+
+.sum-box{
+	float:left;
+	width: 300px;
+	height: 120px;
+	background-color: #6DB6E2;
+	border-radius: 3px;
+	/*color:#329DEA;*/
+	margin:20px 10px;
+}
+
+.num{
+	margin: 0px 0 10px 10px;
+	font-size: 35px;
+	color: #FFFFFF;
+}
+
+.font-icon{
+	margin: 17px 0px 0 0;
+	font-size: 17px;
+	float: right;
+}
+
+.num-font{
+	margin: 10px 0 0 10px;
+	font-size: 30px;
+	color: #FFFFFF;
+
+}
+
+.tongji{
+	width: 250px;
+	height: 80px;
+	margin: 15px auto 0;
+}

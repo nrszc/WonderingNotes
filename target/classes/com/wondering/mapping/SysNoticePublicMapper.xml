@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wondering.dao.SysNoticePublicMapper">
+  <resultMap id="BaseResultMap" type="com.wondering.pojo.SysNoticePublic">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="admin_id" jdbcType="INTEGER" property="admin_id" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, content, create_time, admin_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_sysnotice_public
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_sysnotice_public
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wondering.pojo.SysNoticePublic">
+    insert into tbl_sysnotice_public (id, content, create_time, 
+      admin_id)
+    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, 
+      #{admin_id,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wondering.pojo.SysNoticePublic">
+    insert into tbl_sysnotice_public
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="admin_id != null">
+        admin_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="admin_id != null">
+        #{admin_id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wondering.pojo.SysNoticePublic">
+    update tbl_sysnotice_public
+    <set>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="admin_id != null">
+        admin_id = #{admin_id,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wondering.pojo.SysNoticePublic">
+    update tbl_sysnotice_public
+    set content = #{content,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      admin_id = #{admin_id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--插入一条sysnoticepublic信息-->
+  <insert id="SendNotice" parameterType="com.wondering.pojo.SysNoticePublic">
+    insert into tbl_sysnotice_public (content, create_time, admin_id)
+    values (#{content}, now(), #{admin_id})
+  </insert>
+
+  <!--查询所有public通知-->
+  <select id="GetNoticePublic" resultType="com.wondering.vo.Notice">
+    select a.id as admin_id, a.name as adminname, b.id, b.content, b.create_time
+    from tbl_admin a, tbl_sysnotice_public b
+    where b.admin_id = a.id
+    ORDER BY b.create_time desc
+  </select>
+
+  <!--查询所有public通知-->
+  <select id="GetMsg" resultType="com.wondering.vo.Notice">
+    SELECT create_time, content
+    from tbl_sysnotice_public
+    where create_time>(select create_time from tbl_user a where a.id=14)
+    order by create_time desc
+  </select>
+</mapper>

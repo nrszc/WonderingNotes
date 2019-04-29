@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wondering.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.wondering.pojo.Article">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="article" jdbcType="VARCHAR" property="article" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="favor" jdbcType="INTEGER" property="favor" />
+    <result column="comment" jdbcType="INTEGER" property="comment" />
+    <result column="readed" jdbcType="INTEGER" property="readed" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="title_img" jdbcType="VARCHAR" property="title_img" />
+    <result column="outline" jdbcType="VARCHAR" property="outline" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, article, create_time, update_time, status, favor, comment, readed, title,
+    title_img, outline, city
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_article
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wondering.pojo.Article">
+    insert into tbl_article (id, user_id, article, 
+      create_time, update_time, status, 
+      favor, comment, readed,
+      title, title_img, outline, city
+      )
+    values (#{id,jdbcType=INTEGER}, #{user_id,jdbcType=INTEGER}, #{article,jdbcType=VARCHAR},
+      #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT},
+      #{favor,jdbcType=INTEGER}, #{comment,jdbcType=INTEGER}, #{readed,jdbcType=INTEGER},
+      #{title,jdbcType=VARCHAR}, #{title_img,jdbcType=VARCHAR}, #{outline,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wondering.pojo.Article">
+    insert into tbl_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="article != null">
+        article,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="update_time != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="favor != null">
+        favor,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="readed != null">
+        read,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="title_img != null">
+        title_img,
+      </if>
+      <if test="outline != null">
+        outline,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="article != null">
+        #{article,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null">
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="favor != null">
+        #{favor,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=INTEGER},
+      </if>
+      <if test="readed != null">
+        #{readed,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="title_img != null">
+        #{title_img,jdbcType=VARCHAR},
+      </if>
+      <if test="outline != null">
+        #{outline,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wondering.pojo.Article">
+    update tbl_article
+    <set>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="article != null">
+        article = #{article,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null">
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="favor != null">
+        favor = #{favor,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=INTEGER},
+      </if>
+      <if test="readed != null">
+        readed = #{readed,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="title_img != null">
+        title_img = #{title_img,jdbcType=VARCHAR},
+      </if>
+      <if test="outline != null">
+        outline = #{outline,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wondering.pojo.Article">
+    update tbl_article
+    set user_id = #{user_id,jdbcType=INTEGER},
+      article = #{article,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      favor = #{favor,jdbcType=INTEGER},
+      comment = #{comment,jdbcType=INTEGER},
+      readed = #{readed,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      title_img = #{title_img,jdbcType=VARCHAR},
+      outline = #{outline,jdbcType=VARCHAR}
+      city = #{city,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--插入一条Article信息-->
+  <insert id="InsertArticle" parameterType="com.wondering.pojo.Article">
+    insert into tbl_article (user_id,article,  create_time,
+      update_time, title, title_img, outline, city)
+    values (#{user_id}, #{article}, now(),
+      now(), #{title}, #{title_img}, #{outline}, #{city})
+  </insert>
+
+  <select id="getUserArticle" resultType="com.wondering.vo.ArticleVO">
+    select c.*, d.id as isfavor
+    from (select a.nickname,a.avatar,b.* from tbl_user a, tbl_article b where b.status = 0 and a.id = b.user_id and b.user_id=#{user_id}) c
+    LEFT JOIN tbl_article_favor d on (c.id = d.article_id and d.user_id=#{user_id})
+    order by create_time desc
+  </select>
+
+  <select id="getUserArticle1" resultType="com.wondering.vo.ArticleVO">
+    select *
+    from (select a.nickname,a.avatar,b.* from tbl_user a, tbl_article b where b.status = 0 and a.id = b.user_id and b.user_id=#{user_id}) c
+    order by create_time desc
+  </select>
+
+  <select id="getUserArticle2" resultType="com.wondering.vo.ArticleVO">
+    select c.*, d.id as isfavor
+    from (select a.nickname,a.avatar,b.* from tbl_user a, tbl_article b where b.status = 0 and a.id = b.user_id and b.user_id=#{user_id1}) c
+    LEFT JOIN (select id, article_id from tbl_article_favor where user_id = #{user_id})  d on c.id = d.article_id
+    order by create_time desc
+  </select>
+
+  <!--获取全部游记（分页）-->
+  <select id="getAllPage" resultType="com.wondering.vo.ArticleVO">
+    select a.id as id,user_id, a.city as city, title_img, title, outline, favor, readed, comment, nickname, avatar,a.create_time
+    from tbl_article a, tbl_user b
+    where a.user_id = b.id and a.status = 0 and a.create_time>=DATE_SUB(NOW(),INTERVAL 2 DAY)
+    ORDER BY a.create_time desc
+  </select>
+
+  <!--获取全部游记（分页）-->
+  <select id="getAllPage1" resultType="com.wondering.vo.ArticleVO">
+    select * from
+    (select a.id as id,user_id, a.city as city, title_img, title, outline, favor, readed, comment, nickname, avatar, a.create_time
+    from tbl_article a, tbl_user b
+    where a.user_id = b.id and a.status = 0 and a.create_time>=DATE_SUB(NOW(),INTERVAL 2 DAY)) c LEFT JOIN
+    (select article_id, a.id as isfavor from tbl_article_favor a where a.user_id=#{user_id}) d on c.id = d.article_id
+     ORDER BY create_time desc
+  </select>
+
+  <!--获取轮播图-->
+  <select id="getCarousel" resultType="com.wondering.pojo.Article">
+    select id, title_img,user_id
+    from tbl_article
+    where create_time>=DATE_SUB(NOW(),INTERVAL 2 DAY) and status = 0
+    order by (favor+comment) desc limit 0, 5
+  </select>
+
+    <!--获取关注人最新游记（分页）-->
+    <select id="getNewPage" resultType="com.wondering.vo.ArticleVO">
+    select *
+    from
+    (select a.id as id,user_id, a.city as city, title_img, title, outline, favor, readed, comment, nickname, avatar,a.create_time
+    from tbl_article a, tbl_user b, tbl_user_fans c
+    where a.user_id = b.id and a.status = 0 and c.who_follow = #{user_id} and c.follow_who = b.id and a.create_time>=DATE_SUB(NOW(),INTERVAL 2 DAY)) d LEFT JOIN
+    (select article_id, a.id as isfavor from tbl_article_favor a where a.user_id=#{user_id}) e on d.id = e.article_id
+    ORDER BY create_time desc
+   </select>
+
+    <!--获取榜单游记（分页）-->
+    <select id="getHotPage" resultType="com.wondering.vo.ArticleVO">
+    select a.id as id,user_id, a.city as city, title_img, title, outline, favor, readed, comment, nickname, avatar
+    from tbl_article a, tbl_user b
+    where a.user_id = b.id and a.status = 0 and a.create_time>=DATE_SUB(NOW(),INTERVAL 2 DAY)
+    ORDER BY (favor+comment) desc
+  </select>
+
+  <!--获取榜单游记（分页）-->
+  <select id="getHotPage1" resultType="com.wondering.vo.ArticleVO">
+    select * from
+    (select a.id as id,user_id, a.city as city, title_img, title, outline, favor, readed, comment, nickname, avatar
+    from tbl_article a, tbl_user b
+    where a.user_id = b.id and a.status = 0 and a.create_time>=DATE_SUB(NOW(),INTERVAL 2 DAY)) c LEFT JOIN
+    (select article_id, a.id as isfavor from tbl_article_favor a where a.user_id=#{user_id}) d on c.id = d.article_id
+    ORDER BY (favor+comment) desc
+  </select>
+
+  <!--获取游记展示-->
+  <select id="ShowArticle" resultType="com.wondering.vo.ArticleVO">
+    select a.id as id,user_id, a.city as city,article, title_img, title, outline, favor, readed, comment, nickname, avatar, DATE_FORMAT(a.create_time,'%Y-%m-%d') as create_time
+    from tbl_article a, tbl_user b
+    where a.status = 0 and a.id=#{articleid} and a.user_id = b.id
+  </select>
+
+  <!--获取游记展示-->
+  <select id="ShowArticle1" resultType="com.wondering.vo.ArticleVO">
+    select * from
+    (select a.id as id,user_id, a.city as city,article, title_img, title, outline, favor, readed, comment, nickname, avatar, DATE_FORMAT(a.create_time,'%Y-%m-%d') as create_time
+    from tbl_article a, tbl_user b
+    where a.status = 0 and a.id=#{articleid} and a.user_id = b.id) c LEFT JOIN
+    (select id as isfavor,article_id  from tbl_article_favor where user_id = #{user_id}) d on c.id = d.article_id
+  </select>
+
+  <!--搜索标题-->
+  <select id="searchTitleByWord" resultType="com.wondering.vo.ArticleVO">
+    select a.id as id,user_id, a.city as city, title_img, title, outline, favor, readed, comment, nickname, avatar, DATE_FORMAT(a.create_time,'%Y-%m-%d') as create_time
+    from tbl_article a, tbl_user b
+    where a.status = 0 and a.title LIKE "%"#{search_word}"%" and a.user_id = b.id
+    order by (comment+favor) desc
+  </select>
+
+  <!--搜索标题-->
+  <select id="searchTitleByWord1" resultType="com.wondering.vo.ArticleVO">
+    select * from
+    (select a.id as id,user_id, a.city as city, title_img, title, outline, favor, readed, comment, nickname, avatar, DATE_FORMAT(a.create_time,'%Y-%m-%d') as create_time
+    from tbl_article a, tbl_user b
+    where a.status = 0 and a.title LIKE "%"#{search_word}"%" and a.user_id = b.id) c LEFT JOIN
+    (select article_id, a.id as isfavor from tbl_article_favor a where a.user_id=#{user_id}) d on c.id = d.article_id
+    order by (comment+favor) desc
+  </select>
+
+  <!--搜索地点-->
+  <select id="searchPlaceByWord" resultType="com.wondering.vo.ArticleVO">
+    select a.id as id,user_id, a.city as city, title_img, title, outline, favor, readed, comment, nickname, avatar, DATE_FORMAT(a.create_time,'%Y-%m-%d') as create_time
+    from tbl_article a, tbl_user b
+    where a.status = 0 and a.city LIKE "%"#{search_word}"%" and a.user_id = b.id
+    order by (comment+favor) desc
+  </select>
+
+  <!--搜索地点-->
+  <select id="searchPlaceByWord1" resultType="com.wondering.vo.ArticleVO">
+    select * from
+    (select a.id as id,user_id, a.city as city, title_img, title, outline, favor, readed, comment, nickname, avatar, DATE_FORMAT(a.create_time,'%Y-%m-%d') as create_time
+    from tbl_article a, tbl_user b
+    where a.status = 0 and a.city LIKE "%"#{search_word}"%" and a.user_id = b.id) c LEFT JOIN
+    (select article_id, a.id as isfavor from tbl_article_favor a where a.user_id=#{user_id}) d on c.id = d.article_id
+    order by (comment+favor) desc
+  </select>
+
+  <!--删除游记-->
+  <update id="DeleteArticle" >
+    update tbl_article
+    set status = 1, update_time = now()
+    where id = #{articleid}
+  </update>
+
+  <!--favor+1-->
+  <update id="UpFavor" >
+    update tbl_article
+    set favor = favor + 1
+    where id = #{article_id}
+  </update>
+
+  <!--favor-1-->
+  <update id="DownFavor" >
+    update tbl_article
+    set favor = favor - 1
+    where id = #{article_id}
+  </update>
+
+  <!--统计文章总数-->
+  <select id="GetSumArticle" resultType="Integer">
+    select count(id)
+    from tbl_article
+  </select>
+
+  <!--统计用户总数-->
+  <select id="GetStaArticle" resultType="com.wondering.vo.StatisticsVO">
+    select year(create_time) year,
+    month(create_time) month,
+    count(id) sum
+    from tbl_article
+    where year(create_time)=#{year}
+    group by year(create_time),
+    month(create_time)
+  </select>
+
+</mapper>

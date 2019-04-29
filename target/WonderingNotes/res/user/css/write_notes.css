@@ -1,0 +1,80 @@
+body{
+	margin: 0;
+	padding: 0;
+	font-family: Arial,"Lucida Grande","Microsoft Yahei","Hiragino Sans GB","Hiragino Sans GB W3",SimSun,"PingFang SC",STHeiti;
+}
+
+a{
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.wn-container{
+	min-height: 100%;
+	border: 0px;
+}
+
+.img-banner{
+	width: 100%;
+	height: 450px;
+	background-repeat: no-repeat;
+	background: url(../images/page_bg.jpg);
+}
+
+.img-banner .update-img{
+	position: relative;
+	left:42%;
+	top:29%; 
+}
+
+.btn-style{
+	color: #FFFFFF;
+	font-size: 16px;
+	background-color: transparent;
+	border: 2px solid #5FB878;
+}
+
+.update-img button:hover{
+	color: #FFFFFF;
+	background: #5FB878;
+	border: 2px solid #5FB878;
+}
+
+.title-div{
+	width: 900px;
+	position: absolute;
+	left:-22%;
+	top:570%;
+}
+
+.title-div .city-input{
+	width: 400px;
+	margin-bottom: 10px;
+}
+
+.title-div .title-input{
+	width: 900px;
+	height: 50px;
+	
+}
+
+.title-div .title-tips{
+	position: absolute;
+	left:90%;
+	top:65%;
+}
+
+.title-div .title-tips em{
+	color: red;
+}
+
+.wn-editor{
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.editor-btn{
+	padding-top: 10px;
+	float: right;
+}
+

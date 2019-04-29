@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../res/layui/css/layui.css" />
+        <link rel="stylesheet" href="../../res/font-awesome/css/font-awesome.min.css" >
+        <link rel="stylesheet" href="../../res/user/css/search_user.css" />
+	</head>
+	<body>
+
+	<div id="search1">
+		<div class="nav-container">
+			<div class="nav-list">
+				<a :href="'index.html?location=search_title&search_word='+search_word" class="list-item ">
+					标题
+				</a>
+				<a :href="'index.html?location=search_place&search_word='+search_word" class="list-item">
+					地点
+				</a>
+				<a :href="'index.html?location=search_user&search_word='+search_word" class="list-item list-item-active">
+					找人
+				</a>
+			</div>
+		</div>
+		
+		<div class="search-container">
+			
+			<div v-for="(item,index) in user" class="user-item">
+
+				<div class="user-info">
+					<a class="user-avatar" :href="'index.html?location=user&user_id='+item.user_id">
+						<img v-if="item.avatar==null||item.avatar==''" src="../../res/user/images/avatar.png"/>
+						<img v-else :src="item.avatar"/>
+					</a>
+					<div class="user-more">
+						<div class="user-nickname">
+							<span><a :href="'index.html?location=user&user_id='+item.user_id">{{item.nickname}}</a></span>
+							<span v-if="item.sex==1" class="span-img"><img src="../../res/user/images/man.png" /></span>
+							<span v-else-if="item.sex==2"class="span-img" ><img src="../../res/user/images/woman.png" /></span>
+						</div>
+						<div class="user-news">
+							<span class=""><a :href="'index.html?location=user&user_id='+item.user_id">游记：{{item.articles}}</a></span>
+							<span class=""><a :href="'index.html?location=user&user_id='+item.user_id">关注：{{item.follows}}</a></span>
+							<span class=""><a :href="'index.html?location=user&user_id='+item.user_id">粉丝：{{item.fans}}</a></span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="user-oper">
+					<button v-if="item.isfans" v-on:click="CancelFollow(item.user_id,index)" class="layui-btn layui-btn-sm"  style="background-color: #F1F7ED; color: #666;">&nbsp;取消关注</button>
+                    <button v-else v-on:click="ToFollow(item.user_id ,index)" class="layui-btn layui-btn-sm wn-action-btn1" ><i class="fa fa-plus-circle fa-lg"></i>&nbsp;关注</button>
+                    <button class="layui-btn layui-btn-sm wn-action-btn2">私信</button>
+				</div>
+				
+			</div>
+
+			<div id="pagination"></div>
+			
+		</div>
+	</div>
+		<script src="../../res/common/js/jquery.min.js"></script>
+        <script src="../../res/user/js/search_user.js"></script>
+	</body>
+</html>

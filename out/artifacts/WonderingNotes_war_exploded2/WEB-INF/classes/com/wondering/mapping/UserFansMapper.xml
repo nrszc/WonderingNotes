@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wondering.dao.UserFansMapper">
+  <resultMap id="BaseResultMap" type="com.wondering.pojo.UserFans">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="follow_who" jdbcType="INTEGER" property="follow_who" />
+    <result column="who_follow" jdbcType="INTEGER" property="who_follow" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_time, follow_who, who_follow
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user_fans
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_user_fans
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wondering.pojo.UserFans">
+    insert into tbl_user_fans (id, create_time, follow_who, 
+      who_follow)
+    values (#{id,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, #{follow_who,jdbcType=INTEGER}, 
+      #{who_follow,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wondering.pojo.UserFans">
+    insert into tbl_user_fans
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="follow_who != null">
+        follow_who,
+      </if>
+      <if test="who_follow != null">
+        who_follow,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="follow_who != null">
+        #{follow_who,jdbcType=INTEGER},
+      </if>
+      <if test="who_follow != null">
+        #{who_follow,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wondering.pojo.UserFans">
+    update tbl_user_fans
+    <set>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="follow_who != null">
+        follow_who = #{follow_who,jdbcType=INTEGER},
+      </if>
+      <if test="who_follow != null">
+        who_follow = #{who_follow,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wondering.pojo.UserFans">
+    update tbl_user_fans
+    set create_time = #{create_time,jdbcType=TIMESTAMP},
+      follow_who = #{follow_who,jdbcType=INTEGER},
+      who_follow = #{who_follow,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- 新增方法:检查是否已关注-->
+  <select id="getUserFollow" resultType="Integer" >
+    select COUNT(1)
+    from tbl_user_fans
+    where follow_who = #{follow_who} and who_follow = #{who_follow}
+  </select>
+
+  <!--插入一条user_fans关注信息-->
+  <insert id="ToFollow" >
+    insert into tbl_user_fans(create_time, follow_who, who_follow) values(now(), #{follow_who}, #{who_follow})
+  </insert>
+
+  <!--插入一条user_fans关注信息-->
+  <delete id="CalcelFollow" >
+    delete from tbl_user_fans
+    where who_follow=#{who_follow} and follow_who=#{follow_who}
+  </delete>
+
+  <!--查询关注人-->
+  <select id="getUserFollows" resultType="com.wondering.vo.UserVO">
+    select c.*,c.id as isfans,c.id as user_id
+    from (select b.*,a.create_time as createTime from tbl_user_fans a, tbl_user b where a.who_follow=#{user_id} and a.follow_who = b.id and
+    b.`status`=0) c
+    order by c.createTime desc
+  </select>
+
+  <!--查询粉丝-->
+  <select id="getUserFans" resultType="com.wondering.vo.UserVO">
+    select c.*,d.id as isfans,c.id as user_id
+    from (select b.*, a.create_time as createTime from tbl_user_fans a, tbl_user b where a.follow_who=#{user_id} and a.who_follow = b.id and b.`status`=0) c
+    LEFT JOIN tbl_user_fans d on (c.id = d.follow_who and d.who_follow = #{user_id})
+    order by c.createTime desc
+  </select>
+
+  <!--登录查询（别人的）粉丝-->
+  <select id="getUserFansByLogin" resultType="com.wondering.vo.UserVO">
+    select c.*,d.id as isfans,c.id as user_id
+    from (select b.*, a.create_time as createTime from tbl_user_fans a, tbl_user b where
+    a.follow_who=#{user_id1} and a.who_follow = b.id and b.`status`=0) c
+    LEFT JOIN tbl_user_fans d on (c.id = d.follow_who and d.who_follow = #{user_id})
+    order by c.createTime desc
+  </select>
+
+  <!--未登录查询（别人的）粉丝-->
+  <select id="getUserFansByNoLogin" resultType="com.wondering.vo.UserVO">
+    select c.*,c.id as user_id
+    from (select b.*, a.create_time as createTime from tbl_user_fans a, tbl_user b where
+    a.follow_who=#{user_id} and a.who_follow = b.id and b.`status`=0) c
+    order by c.createTime desc
+  </select>
+
+  <!--登录查询（别人的）关注-->
+  <select id="getUserFollowsByLogin" resultType="com.wondering.vo.UserVO">
+    select c.*,c.id as user_id,d.id as isfans
+    from (select b.*,a.create_time as createTime from tbl_user_fans a, tbl_user b where a.who_follow=#{user_id1}
+    and a.follow_who = b.id and
+    b.`status`=0) c LEFT JOIN tbl_user_fans d on (c.id = d.follow_who and d.who_follow = #{user_id} )
+    order by c.createTime desc
+  </select>
+
+  <!--未登录查询（别人的）关注-->
+  <select id="getUserFollowsByNoLogin" resultType="com.wondering.vo.UserVO">
+    select c.*,c.id as user_id
+    from (select b.*,a.create_time as createTime from tbl_user_fans a, tbl_user b where a.who_follow=#{user_id}
+    and a.follow_who = b.id and b.`status`=0) c
+    order by c.createTime desc
+  </select>
+
+
+</mapper>

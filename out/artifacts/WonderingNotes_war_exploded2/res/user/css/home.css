@@ -1,0 +1,390 @@
+body{
+	background-color: #efefef;
+	margin: 0;
+	padding: 0;
+	font-family: Arial,"Lucida Grande","Microsoft Yahei","Hiragino Sans GB","Hiragino Sans GB W3",SimSun,"PingFang SC",STHeiti;
+}
+
+a{
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.home-container{
+	min-height: 100%;
+	border: 0px;
+}
+
+.img-banner{
+	width: 100%;
+	height: 300px;
+	background: url(https://n1-q.mafengwo.net/s11/M00/D4/FA/wKgBEFxRewiAD5_gAAONyZXt0lE80.jpeg?imageMogr2%2Finterlace%2F1);
+}
+
+.img-banner .update-img{
+	position: absolute;
+	left:45%;
+	top:13%; 
+}
+
+.btn-style{
+	color: #FFFFFF;
+	font-size: 16px;
+	background-color: transparent;
+	border: 2px solid #5FB878;
+}
+
+.update-img button:hover{
+	color: #FFFFFF;
+	background: #5FB878;
+	border: 2px solid #5FB878;
+}
+
+.home-wrapper{
+	min-height: 100%;
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.side-bar{
+	float: left;
+	width: 300px;
+	min-height: 100%;
+	margin-top: 10px;
+	margin-left: 10px;
+	background-color: #FFFFFF;
+}
+
+.wn-content{
+	float: right;
+	width: 660px;
+	margin-top: 10px;
+	margin-right: 10px;
+	min-height: 100%;
+	background-color: #FFFFFF;
+}
+
+.wn-avatar{
+	width: 120px;
+    height: 120px;
+    position: relative;
+    margin: 10px auto 0;
+}
+
+.wn-avatar img{
+	cursor: pointer;
+    z-index: 20;
+    border-radius: 120px;
+}
+
+.wn-name{
+	color: #666;
+	margin: 0 auto;
+	font-size: 22px;
+    margin: 15px auto 0;
+    width: 100%;
+	text-align: center;
+}
+
+.wn-name img{
+	height: 25px;
+	width: 25px;
+}
+
+.wn-action{
+	width: 130px;
+	margin: 15px auto 0;
+}
+
+.profile{
+	width: 220px;
+	margin: 20px auto 0;
+}
+
+.more{
+	margin-top: 20px;
+	border-top: #e2e2e2 1px solid;
+    
+}
+
+.nums{
+	color: #666;
+	position: relative;
+    width: 33%;
+    float: left;
+    padding: 10px 0;
+    text-align: center;
+    line-height: 20px;
+    border-left: #e2e2e2 1px solid;
+    border-bottom: #e2e2e2 1px solid;
+}
+
+.music-div{
+	float: left;
+	margin-top: 20px;
+}
+
+.wn-music{
+	float: left;
+	margin-left: 5px;
+	width: 260px;
+	border-radius: 5px;
+}
+
+.upload-music{
+	float: right;
+	margin-top: 15px;
+	color: #5FB878;
+}
+
+.upload-music a{
+	color:#5FB878;
+}
+
+.nar-bar{
+	background-color: #FFFFFF;
+	width: 100%;
+	height: 50px;
+}
+
+.flt2{
+	display: block;
+	float: left;
+	width: 100%;
+	height: 50px;
+	margin-bottom: 2px;
+}
+
+.flt2 .tags_link{
+	display: inline-block;
+	float: left;
+	width: 160px;
+	height: 50px;
+	line-height: 50px;
+	color: #333333;
+	background-color: #FFFFFF;
+}
+
+.flt2 li a{
+	cursor: pointer;
+	display: block;
+	width: 160px;
+	height: 50px;
+	text-decoration: none;
+    font-size: 20px;
+    color: #444;
+	text-align: center;
+}
+
+.flt2 li a:hover{
+	color: #5FB878;
+}
+
+.link-active{
+	border-bottom: 2px solid #5FB878;
+}
+
+.content{
+	margin-top: 10px;
+	min-height: 100%;
+	width: 97%;
+}
+
+.home-tn-item{
+	width: 100%;
+	float: left;
+	padding: 15px 10px;
+}
+
+#show-article :hover{
+	background-color:#F8F8F8 ;
+}
+
+.home-tn-image{
+	float: left;
+    width: 220px;
+    height: 140px;
+    position: relative;
+}
+
+.home-tn-image img {
+    width: 220px;
+    height: 140px;
+}
+
+.home-tn-wrapper{
+	float: right;
+    width: 410px;
+    height: 140px;
+}
+
+.home-tn-item dl {
+    height: 115px;
+    margin: 0;
+}
+
+.home-tn-item dt {
+    height: 30px;
+    font-size: 18px;
+    line-height: 26px;
+}
+
+.home-tn-item dt a:hover{
+	color: #5FB878;
+}
+
+.home-tn-item dd {
+    line-height: 20px;
+    font-size: 14px;
+    overflow: hidden;
+
+}
+
+.home-tn-item dd a{
+	display: block;
+	height: 80px;
+	overflow:hidden; //超出的文本隐藏
+text-overflow:ellipsis; //溢出用省略号显示
+white-space:nowrap; //溢出不换行
+	color: #666;
+}
+
+.home-tn-extra {
+    height: 33px;
+    overflow: hidden;
+    line-height: 33px;
+}
+
+.home-tn-extra span{
+    display: inline-block;
+    color: #666;
+}
+
+.home-tn-extra .home-tn-place {
+    margin-left: 10px;
+}
+
+.home-tn-extra .home-tn-user{
+	margin-left: 20px;
+}
+
+.home-tn-user a{
+	color:#5FB878;
+}
+
+.home-tn-extra .home-tn-like{
+	float: right;
+	margin-right: 10px;
+}
+
+.home-tn-extra .home-tn-comment{
+	float: right;
+	margin-right: 20px;
+}
+
+#page,#page1,#page2,#page3{
+	float: right;
+}
+
+.more-opre{
+	display: block;
+	width: 100px;
+	position:relative;
+	left: 305px;
+	top:-5px;
+	font-size: 13px;
+	background-color: #ffffff;
+	box-shadow: 0px 2px 8px 1px rgba(0,0,0,0.2);
+}
+
+.more-opre li{
+	display: block;
+}
+
+.more-opre li:hover{
+	background-color: #F2F2F5;
+}
+
+.more-opre li a{
+	display: block;
+	width: 100%;
+	text-align: center;
+}
+
+.user-item{
+	padding-left: 20px;
+	padding-top: 15px;
+	width: 100%;
+	height: 80px;
+}
+
+.show-user div:hover{
+	background-color:#F8F8F8 ;
+}
+
+
+.user-item .user-info{
+	float: left;
+	width: 350px;
+	height: 80px;
+	/*background-color: #009688;*/
+	overflow: hidden;
+}
+
+.user-item .user-oper{
+	line-height: 70px;
+	float: right;
+	width: 200px;
+	height: 80px;
+	/*background-color: #009688;*/
+}
+
+.user-info .user-avatar{
+	width: 60px;
+	float: left;
+    display: block;
+    margin-top: 15px;
+    margin-left: 5px;
+}
+
+.user-info img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.user-info .user-more{
+	width: 285px;
+	height: 80px;
+	float: right;
+	/*background-color: #000000;*/
+}
+
+.user-more .user-nickname{
+	margin-top: 5px;
+	height: 40px;
+}
+
+.user-nickname a{
+	display: inline-block;
+	margin-top: 15px;
+}
+
+.user-nickname span img{
+	width: 25px;
+	height: 25px;
+}
+
+.span-img{
+	line-height: 45px;
+}
+
+.user-news{
+	height: 30px;
+}
+
+.user-news a{
+	line-height: 0px;
+	color: #666;
+}
+

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wondering.dao.ArticleCollectMapper">
+  <resultMap id="BaseResultMap" type="com.wondering.pojo.ArticleCollect">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="article_id" jdbcType="INTEGER" property="article_id" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, article_id, user_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_article_collect
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_article_collect
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wondering.pojo.ArticleCollect">
+    insert into tbl_article_collect (id, article_id, user_id, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{article_id,jdbcType=INTEGER}, #{user_id,jdbcType=INTEGER}, 
+      #{create_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wondering.pojo.ArticleCollect">
+    insert into tbl_article_collect
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="article_id != null">
+        article_id,
+      </if>
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="article_id != null">
+        #{article_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wondering.pojo.ArticleCollect">
+    update tbl_article_collect
+    <set>
+      <if test="article_id != null">
+        article_id = #{article_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wondering.pojo.ArticleCollect">
+    update tbl_article_collect
+    set article_id = #{article_id,jdbcType=INTEGER},
+      user_id = #{user_id,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- 新增方法:检查是否已收藏-->
+  <select id="getArticleCollect" resultType="Integer" >
+    select COUNT(1)
+    from tbl_article_collect
+    where user_id = #{user_id} and article_id = #{articleid}
+  </select>
+
+  <!--插入一条tbl_article_collect收藏信息-->
+  <insert id="ToCollect" >
+    insert into tbl_article_collect(create_time, user_id, article_id) values(now(), #{user_id}, #{articleid})
+  </insert>
+
+  <!--插入一条tbl_article_collect收藏信息-->
+  <delete id="CancelCollect" >
+    delete from tbl_article_collect
+    where user_id=#{user_id} and article_id=#{articleid}
+  </delete>
+
+  <!--获取用户的收藏游记-->
+  <select id="getUserCollectArticle" resultType="com.wondering.vo.ArticleVO">
+    select c.*, d.id as isfavor
+    from
+    (select a.nickname,a.avatar,b.*, f.create_time as createtime
+    from tbl_user a, tbl_article b,tbl_article_collect f
+    where b.id = f.article_id and b.`status`=0 and a.id = b.user_id and f.user_id=#{user_id}) c
+    LEFT JOIN tbl_article_favor d on (c.id = d.article_id and d.user_id=#{user_id})
+    order by c.createtime desc
+  </select>
+</mapper>

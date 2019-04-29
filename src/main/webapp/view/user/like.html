@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../res/user/css/like.css" />
+		<link rel="stylesheet" href="../../res/emoji/css/emojionearea.css">
+	</head>
+	<body>
+		
+		<div id="like-box" class="like-box">
+
+			<div class="choice">
+				<a v-on:click="articlefavor">文章</a>
+				<a v-on:click="commentfavor">评论</a>
+			</div>
+			
+			<div v-for="(item,index) in favor" class="like-item">
+				
+				<div class="like-detail">
+					<div class="like-left">
+						<a :href="'index.html?location=user&user_id='+item.buser_id" target="_blank">
+							<img v-if="item.bavatar==null||item.Bavatar==''" src="../../res/user/images/avatar.png" />
+							<img v-else :src="item.bavatar" />
+						</a>
+					</div>
+					<div class="like-right">
+						<div class="like-nickname">
+							<span><a style="color:#5FB878;" :href="'index.html?location=user&user_id='+item.buser_id" target="_blank">{{item.bnickname}}</a></span>
+							<span>
+								<img v-if="item.bsex==1" src="../../res/user/images/man.png"/>
+								<img v-else-if="item.bsex==0" src="../../res/user/images/woman.png"/>
+							</span>
+						</div>
+						<div class="like-time">
+							<span>{{item.create_time}}</span>
+						</div>
+						<div class="the-like">
+							<span v-if="item.title==null||item.title==''">赞了你的评论</span>
+							<span v-else>赞了你的文章</span>
+						</div>
+						<div class="the-article">
+							<span><a style="color:#5FB878;" :href="'index.html?location=user&user_id='+item.auser_id" target="_blank">{{item.anickname}}</a>：</span>
+							<span class="content" v-if="item.title==null||item.title==''">{{item.content}}</span>
+							<span v-else><a :href="'index.html?location=show_notes&&articleid='+item.article_id" target="_blank">{{item.title}}</a></span>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+			
+			<!--<div class="like-item">-->
+				<!---->
+				<!--<div class="like-detail">-->
+					<!--<div class="like-left">-->
+						<!--<a>-->
+					       <!--<img src="../../res/user/images/1.jpg" />-->
+					    <!--</a>-->
+					<!--</div>-->
+					<!--<div class="like-right">-->
+						<!--<div class="like-nickname">-->
+							<!--<span>搞机圈的那些事</span>-->
+							<!--<span><img src="../../res/user/images/man.png"/></span>-->
+						<!--</div>-->
+						<!--<div class="like-time">-->
+							<!--<span>2月21日 20:53</span>-->
+						<!--</div>-->
+						<!--<div class="the-like">-->
+							<!--<span>赞了你的评论</span>-->
+						<!--</div>-->
+						<!--<div class="the-article">-->
+							<!--<span>铺垫：</span>-->
+						    <!--<span>#瓦伦西亚vs西班牙人# 中国球员武磊为西班牙人首发！西甲历史上第一位首发的中国球员出现了。西亚vs西班牙人# 中国球员武磊为西班牙人首发！西甲历西亚vs西班牙人# 中国球员武磊为西班牙人首发！西甲历西亚vs西班牙人# 中国球员武磊为西班牙人首发！西甲历</span>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+				<!---->
+			<!--</div>-->
+			
+		</div>
+		
+		<script src="../../res/common/js/jquery.min.js"></script>
+		<script src="../../res/emoji/js/emojionearea.js"></script>
+		<script src="../../res/user/js/like.js"></script>
+	</body>
+</html>

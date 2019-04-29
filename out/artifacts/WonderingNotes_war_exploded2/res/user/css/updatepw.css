@@ -1,0 +1,155 @@
+html { background-color: #F9F9F9; }
+body {
+	color: #333;
+	font: 14px/1.8 Tahoma, Geneva, '\5B8B\4F53';
+}
+ol {
+	list-style: none outside none;
+	
+}
+.navi-container{
+	padding-top:30px;
+}
+.ui-step {
+	width: 600px;
+	color: #b7b7b7;
+	padding: 0 60px;
+	margin:0px auto;
+	position: relative;
+}
+.ui-step:after {
+	display: block;
+	content: "";
+	height: 0;
+	font-size: 0;
+	clear: both;
+	overflow: hidden;
+	visibility: hidden;
+}
+.ui-step li {
+	float: left;
+	position: relative;
+}
+.ui-step .step-end {
+	width: 120px;
+	position: absolute;
+	top: 0;
+	right: -60px;
+}
+.ui-step-line {
+	height: 5px;
+	background-color: #e0e0e0;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
+	margin-top: 15px;
+}
+.step-end .ui-step-line { display: none; }
+.ui-step-cont {
+	width: 120px;
+	position: absolute;
+	top: 0;
+	left: -15px;
+	text-align: center;
+}
+.ui-step-cont-number {
+	display: inline-block;
+    *zoom:1;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	border-radius: 50%;
+	border-left: 2px solid #fff;
+	border-right: 2px solid #fff;
+	border: 2px solid rgba(224,224,224,1);
+	font-family: tahoma;
+	font-weight: bold;
+	font-size: 16px;
+	background-color: #b9b9b9;
+	box-shadow: inset 1px 1px 2px rgba(0,0,0,.2);
+}
+.ui-step-cont-text {
+	position: relative;
+	top: 34px;
+	left: -42px;
+	font-size: 1.1em;
+}
+/** 步骤数定义 **/
+.ui-step-3 li { width: 50%; }
+.ui-step-4 li { width: 33.3%; }
+.ui-step-5 li { width: 25%; }
+.ui-step-6 li { width: 20%; }
+/** The default style (默认风格) **/
+/* Done */
+.step-done .ui-step-cont-number { background-color: #5FB878; }
+.step-done .ui-step-cont-text { color: #5FB878; font-size: 1.1em;}
+.step-done .ui-step-line { background-color: #5FB878; }
+/* Active */
+.step-active .ui-step-cont-number { background-color: #009688; }
+.step-active .ui-step-cont-text {
+	color: #009688;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+.step-active .ui-step-line { background-color: #e0e0e0; }
+
+.box-container{
+	margin:70px auto 0;
+	width: 800px;
+	height: 400px;
+	background-color: #FFFFFF;
+	border-radius:5px;
+	box-shadow: 0 0 5px #c7c5c5;
+}
+
+.check-box{
+	/*display:none;*/
+	margin: 0 auto;
+	width: 500px;
+    padding-top: 100px;
+    position:relative;
+}
+
+#codebtn{
+	position:absolute;
+	left: 320px;
+	top: 153px;
+}
+
+.password-box{
+	display: none;
+	margin-left: 100px;
+    padding-top: 100px;
+    position:relative;
+}
+
+.tips1{
+	position:absolute;
+	left: 420px;
+	top: 110px;
+}
+
+.tips2{
+	position:absolute;
+	left: 420px;
+	top: 160px;
+}
+
+.finish-box{
+	display: none;
+	margin:auto;
+	width: 400px;
+    padding-top: 100px;
+    position:relative;
+    text-align:center;
+}
+
+.go-home{
+	font-size: 2em;
+}
+
+.go-login{
+	font-size: 2em;
+}

@@ -1,0 +1,22 @@
+.table-container{
+	margin: 0 auto;
+	width: 1200px;
+}
+
+.page{
+	float: right;
+}
+
+.div-opre{
+	margin: 10px 0;
+	overflow:hidden;
+}
+
+.btn-opre{
+	float: left;
+}
+
+.time-search{
+	float: right;
+}
+

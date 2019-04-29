@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../res/user/css/comment.css" />
+        <link rel="stylesheet" href="../../res/emoji/css/emojionearea.css">
+	</head>
+	<body>
+		<div id="comment-box" class="comment-box">
+
+			<div class="choice">
+				<a v-on:click="articlecomment">文章</a>
+				<a v-on:click="commentcomment">评论</a>
+			</div>
+			
+			<div v-for="(item,index) in comments" class="comment-item">
+				
+				<div class="comment-detail">
+					<div class="comment-left">
+						<a :href="'index.html?location=user&user_id='+item.buser_id" target="_blank">
+					        <img v-if="item.bavatar==null||item.Bavatar==''" src="../../res/user/images/avatar.png" />
+							<img v-else :src="item.bavatar" />
+					    </a>
+					</div>
+					<div class="comment-right">
+						<div class="comment-nickname">
+							<span><a style="color:#5FB878;" :href="'index.html?location=user&user_id='+item.buser_id" target="_blank">{{item.bnickname}}</a></span>
+							<span>
+								<img v-if="item.bsex==1" src="../../res/user/images/man.png"/>
+								<img v-else-if="item.bsex==0" src="../../res/user/images/woman.png"/>
+							</span>
+						</div>
+						<div class="comment-time">
+							<span>{{item.create_time}}</span>
+						</div>
+						<div class="the-comment">
+							<span>{{item.acontent}}</span>
+						</div>
+						<div class="the-article">
+							<span><a style="color:#5FB878;" :href="'index.html?location=user&user_id='+item.auser_id" target="_blank">{{item.anickname}}</a>：</span>
+						    <span v-if="item.title==null||item.title==''">{{item.bcontent}}</span>
+                            <span v-else><a :href="'index.html?location=show_notes&&articleid='+item.article_id" target="_blank">{{item.title}}</a></span>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+			
+			<!--<div class="comment-item">-->
+
+				<!--<div class="comment-detail">-->
+					<!--<div class="comment-left">-->
+						<!--<a>-->
+					       <!--<img src="../../res/user/images/1.jpg" />-->
+					    <!--</a>-->
+					<!--</div>-->
+					<!--<div class="comment-right">-->
+						<!--<div class="comment-nickname">-->
+							<!--<span>搞机圈的那些事</span>-->
+							<!--<span><img src="../../res/user/images/man.png"/></span>-->
+						<!--</div>-->
+						<!--<div class="comment-time">-->
+							<!--<span>2月21日 20:53</span>-->
+						<!--</div>-->
+						<!--<div class="the-comment">-->
+							<!--<span>送一台王源代言的小米9，都转了吗[doge]</span>-->
+						<!--</div>-->
+						<!--<div class="the-article">-->
+							<!--<span>铺垫：</span>-->
+						    <!--<span>#瓦伦西亚vs西班牙人# 中国球员武磊为西班牙人首发！西甲历史上第一位首发的中国球员出现了。西亚vs西班牙人# 中国球员武磊为西班牙人首发！西甲历西亚vs西班牙人# 中国球员武磊为西班牙人首发！西甲历西亚vs西班牙人# 中国球员武磊为西班牙人首发！西甲历</span>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+
+			<!--</div>-->
+			
+		</div>
+		<script src="../../res/common/js/jquery.min.js"></script>
+        <script src="../../res/emoji/js/emojionearea.js"></script>
+		<script src="../../res/user/js/comment.js"></script>
+	</body>
+</html>

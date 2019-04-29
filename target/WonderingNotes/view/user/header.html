@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../res/layui/css/layui.css" />
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<style> 
+		    body{
+			    margin: 0;
+		       	padding: 0;
+		    }
+			.header{
+				width: 100%;
+				height: 70px;
+				background-color: #FFFFFF;
+				margin: 0;
+				padding: 0 0px;
+				border-bottom: 2px solid #D6D6D6;
+			}
+			.header-wrap{
+				width: 1100px;
+				height: 70px; 
+				margin: 0 auto;
+			}
+			.head-nav{
+				margin: 0;
+				padding: 0;
+			}
+			.logo{
+				float: left;
+				padding: 5px 0;
+				height: 60px;
+				width: 180px;
+				padding-right: 20px;     
+			}
+			.logo .wn-logo{
+				display: block;
+				background: url(../../res/user/images/wnlogo.png) no-repeat;
+				background-size: 180px 60px;
+				height: 60px;
+				width: 180px;      
+			}
+			.head-nav{
+				height: 70px;
+				line-height:70px;
+                white-space: nowrap;
+                font-size: 19px;
+                font-family: Arial,"Lucida Grande","Microsoft Yahei","Hiragino Sans GB","Hiragino Sans GB W3",SimSun,"PingFang SC",STHeiti;
+			}
+			.head-nav .head-nav-index{
+				text-align: center;
+				width:80px; 
+                display: inline-block;
+                margin-right: -6px;
+			}
+			.head-nav .head-nav-index a{
+				display: block;
+				width: 80px;
+				height: 70px;
+                text-decoration: none;
+			}
+			.head-nav .head-nav-index a:hover{
+				border-bottom: 2px solid #5FB878;
+			}
+			.head-nav-active{
+				color: #FFFFFF;
+				background-color: #5FB878;
+			}
+			.search-input{
+				position: absolute;
+                top: 15px;
+                left: 800px;
+				width: 300px;
+				height: 40px;
+			}
+			.search-btn{
+				position: absolute;
+                top: 16px;
+                left: 1120px;
+			}
+			.head-login{
+				display: none;
+				position: absolute;
+                top: 25px;
+                left: 1200px;
+			}
+			.head-msg{
+				position: absolute;
+                top: 7px;
+                left: 0px;
+                color: #666;
+			}
+			.head-msg a:hover{
+				color: #5FB878;
+			}
+			.login-done{
+				position: absolute;
+                top: 18px;
+                left: 1200px;
+                width: 100px;
+			}
+			.head-avatar{
+				position: absolute;
+                top: 0px;
+                left: 60px;
+			}
+			.head-avatar i:hover{
+				color: #5FB878;
+			}
+			.head-avatar img{
+				width: 34px;
+                height: 34px;
+                display: flex;
+                border-radius: 50%;
+                overflow: hidden;
+			}
+			.myavatar{
+				position: absolute;
+                top: 11px;
+                left: 40px;
+			}
+			.msg-ul{
+				display: none;
+				position: absolute;
+                top: 71px;
+                left: 1140px;
+				width:200px;
+				background-color: #FFFFFF;
+				z-index: 10;
+			}
+			.msg-ul li{
+				width:200px; 
+                height:36px; 
+                line-height:37px;
+			}
+			.msg-ul li a{
+				display: block;
+				width:180px; 
+                height:36px; 
+                text-decoration: none;
+                font-size: 16px;
+                color: #666;
+                padding-left: 20px;
+			}
+			.msg-ul li a:hover{
+				background-color: #E6E6E6;
+			}
+			.avatar-ul{
+				display: none;
+				position: absolute;
+                top: 71px;
+                left: 1200px;
+				width:200px;
+				background-color: #FFFFFF;
+				z-index: 10;
+			}
+			.avatar-ul li{
+				width:200px; 
+                height:36px; 
+                line-height:37px;
+			}
+			.avatar-ul li a{
+				display: block;
+				width:180px; 
+                height:36px; 
+                text-decoration: none;
+                font-size: 16px;
+                color: #666;
+                padding-left: 20px;
+			}
+			.avatar-ul li a:hover{
+				background-color: #E6E6E6;
+			}
+		</style>
+	</head>
+	<body>
+	
+		<div class="header">
+		  <div class="header-wrap">
+			<div class="logo">
+				<a class="wn-logo" href="#" title="流浪记"></a>
+			</div>
+			<ul class="head-nav ">
+				<li class="head-nav-index" style="color: #FFFFFF;">
+					<a class="head-nav-active" href="#">首页</a>
+				</li>
+				<li class="head-nav-index">
+					<a href="#">首页</a>
+				</li>
+				<li class="head-nav-index">
+					<a href="#">首页</a>
+				</li>
+			</ul>
+			<div class="head-search">
+			    <input type="text" name="search" placeholder="游记/游子" class="layui-input search-input">
+			    <button class="layui-btn search-btn"><i class="fa fa-search fa-lg"></i></button>
+			</div>
+			<div class="head-login">
+				<a href="#">登录</a>
+				<a href="#">注册</a>
+			</div>
+			<div class="login-done">
+				<div class="head-msg">
+					<a href="#">消息&nbsp;<i class="fa fa-caret-down fa-lg"></i></a>
+				</div>
+			    <div class="head-avatar">
+			    	<a href="#">
+				       <img src="../../res/user/images/qq.png" /><i  class="fa fa-caret-down fa-lg myavatar"></i>
+				    </a>
+			    </div>
+			</div>
+		  </div>
+		</div>
+		
+		<ul class="msg-ul">
+			<li><a href="#">ok</a></li>
+			<li><a href="#">ok</a></li>
+			<li><a href="#">ok</a></li>
+		</ul>
+		
+		<ul class="avatar-ul">
+			<li><a href="#">ok</a></li>
+			<li><a href="#">ok</a></li>
+			<li><a href="#">ok</a></li>
+		</ul>
+		
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+		<script src="../../res/user/js/index.js"></script>
+		
+	</body>
+</html>

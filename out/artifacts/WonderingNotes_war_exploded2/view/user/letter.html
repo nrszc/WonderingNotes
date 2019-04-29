@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../res/user/css/letter.css" />
+	</head>
+	<body>
+		
+		<div id="letter-box" class="letter-box">
+			
+			<div v-for="m in message" v-on:click="tochat(m.user_id)" class="letter-item">
+				<div class="letter-left">
+					<a :href="'index.html?location=user&user_id='+m.user_id" v-on:click.stop target="_blank">
+						<img v-if="m.avatar==null||m.avatar==''" src="../../res/user/images/avatar.png"/>
+						<img v-else :src="m.avatar"/>
+					</a>
+				</div>
+				<div class="letter-right">
+					<div class="letter-up">
+					    <div class="letter-nickname">
+						     <a :href="'index.html?location=user&user_id='+m.user_id" v-on:click.stop target="_blank">{{m.nickname}}</a>
+					    </div>
+					    <div class="letter-time">
+						     <span>{{m.create_time}}</span>
+					    </div>
+					</div>
+					<div class="letter-down">
+						<span>{{m.content}}</span>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+
+		<script src="../../res/common/js/jquery.min.js"></script>
+		<script src="../../res/common/js/vue.min.js"></script>
+		<script src="../../res/layui/layui.js"></script>
+		<script src="../../res/user/js/letter.js"></script>
+	</body>
+</html>

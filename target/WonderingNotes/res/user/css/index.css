@@ -1,0 +1,209 @@
+.container{
+	position:relative;  
+    width:100%;
+    min-height:100%; 
+}
+.footer {
+    background-color: #3c3c3c;
+    height: 60px;
+    width: 100%;
+    color: #c2c2c2;
+    line-height: 22px;
+    padding-bottom: 10px;
+    font-size: 12px;
+}
+.ft-copyright {
+    padding: 12px 0 12px 20px;
+    margin-top: -1px;
+    border-top: 1px solid #575a5b;
+}
+.ft-content {
+    width: 1000px;
+    margin: 0 auto;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+.header {
+	/*position:absolute;*/
+    width: 100%;
+    height: 70px;
+    background-color: #FFFFFF;
+    margin: 0;
+    padding: 0 0px;
+    border-bottom: 2px solid #D6D6D6;
+}
+.header-wrap {
+    width: 1100px;
+    height: 70px;
+    margin: 0 auto;
+}
+.head-nav {
+    margin: 0;
+    padding: 0;
+}
+.logo {
+    float: left;
+    padding: 5px 0;
+    height: 60px;
+    width: 180px;
+    padding-right: 20px;
+}
+.logo .wn-logo {
+    display: block;
+    background: url(../images/wnlogo.png) no-repeat;
+    background-size: 180px 60px;
+    height: 60px;
+    width: 180px;
+}
+.head-nav {
+    height: 70px;
+    line-height:70px;
+    white-space: nowrap;
+    font-size: 19px;
+    font-family: Arial, "Lucida Grande", "Microsoft Yahei", "Hiragino Sans GB", "Hiragino Sans GB W3", SimSun, "PingFang SC", STHeiti;
+}
+.head-nav .head-nav-index {
+    text-align: center;
+    width:80px;
+    display: inline-block;
+    margin-right: -6px;
+}
+.head-nav .head-nav-index a {
+    display: block;
+    width: 80px;
+    height: 70px;
+    text-decoration: none;
+}
+.head-nav .head-nav-index a:hover {
+    border-bottom: 2px solid #5FB878;
+}
+.head-nav-active {
+    color: #FFFFFF;
+    background-color: #5FB878;
+}
+.search-input {
+    position: absolute;
+    top: 15px;
+    left: 800px;
+    width: 300px;
+    height: 40px;
+}
+.search-btn {
+    position: absolute;
+    top: 16px;
+    left: 1120px;
+}
+.head-login {
+    position: absolute;
+    top: 25px;
+    left: 1200px;
+}
+.head-msg {
+    position: absolute;
+    top: 7px;
+    left: 0px;
+    color: #666;
+}
+.head-msg a:hover {
+    color: #5FB878;
+}
+.login-done {
+    display : none;
+    position: absolute;
+    top: 18px;
+    left: 1200px;
+    width: 100px;
+}
+.head-avatar {
+    position: absolute;
+    top: 0px;
+    left: 60px;
+}
+.head-avatar i:hover {
+    color: #5FB878;
+}
+.head-avatar img {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.myavatar {
+    position: absolute;
+    top: 11px;
+    left: 40px;
+}
+.msg-ul {
+    display: none;
+    position: absolute;
+    top: 71px;
+    left: 1140px;
+    width:200px;
+    background-color: #FFFFFF;
+    z-index: 10;
+}
+.msg-ul li {
+    width:200px;
+    height:36px;
+    line-height:37px;
+}
+.msg-ul li a {
+    display: block;
+    width:180px;
+    height:36px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #666;
+    padding-left: 20px;
+}
+.msg-ul li a:hover {
+    background-color: #E6E6E6;
+}
+.avatar-ul {
+    display: none;
+    position: absolute;
+    top: 71px;
+    left: 1200px;
+    width:200px;
+    background-color: #FFFFFF;
+    z-index: 10;
+}
+.avatar-ul li {
+    width:200px;
+    height:36px;
+    line-height:37px;
+}
+.avatar-ul li a {
+    display: block;
+    width:180px;
+    height:36px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #666;
+    padding-left: 20px;
+}
+.avatar-ul li a:hover {
+    background-color: #E6E6E6;
+}
+
+#a1,#a2,#a3{
+	cursor: pointer;
+}
+
+#frame{
+	padding-bottom: 30px;
+	position: relative;
+	width: 100%;
+    min-height: 553px;
+    overflow:hidden;
+}
+
+a{
+	cursor: pointer;
+	text-decoration: none;
+}
+
+

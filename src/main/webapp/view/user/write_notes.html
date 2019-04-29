@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../res/layui/css/layui.css" />
+        <link rel="stylesheet" href="../../res/font-awesome/css/font-awesome.min.css" >
+        <link rel="stylesheet" href="../../res/user/css/write_notes.css" />
+	</head>
+	<body>
+		
+		<div class="wn-container">
+			<!--游记头图-->
+			<div class="img-banner">
+				<div class="update-img">
+					<button id="file_btn" class="layui-btn layui-btn-radius layui-btn-primary btn-style"><i class="fa fa-plus-circle fa-lg"></i>&nbsp;上传/更改游记头图</button>
+					<form id="noteform"  method="post" enctype="multipart/form-data">
+					    <input style="visibility:hidden; position:absolute;" name="file"  id="file" type="file"/>
+						<input style="visibility:hidden; position:absolute;" name="article" id="article" type="text"/>
+						<input style="visibility:hidden; position:absolute;" name="outline" id="outline" type="text"/>
+					<div class="title-div">
+						<input type="text" maxlength="30" name="city" id="city" placeholder="填写城市" autocomplete="off" class="layui-input city-input">
+					    <input type="text" maxlength="30" name="title" id="title" placeholder="填写游记标题" autocomplete="off" class="layui-input title-input">
+					    <span class="title-tips">最多输入<em>30</em>字</span>
+					</div>
+					</form>
+				</div>
+			</div>
+			
+			<div class="wn-editor">
+			    <div id="editor">
+<!--　                                                 &lt;!&ndash; 默认显示 &ndash;&gt;-->
+                   <!--<p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>-->
+                </div>
+                <div class="editor-btn">
+                    <button class="layui-btn layui-btn-lg layui-btn-radius" id="editorGetBtn1">预览</button>
+                    <button class="layui-btn layui-btn-lg layui-btn-radius" id="editorGetBtn2">发表</button>
+                </div>
+            </div>
+
+
+            
+            
+			
+			
+		</div>
+		
+		
+		<script src="../../res/common/js/jquery.min.js"></script>
+		<script src="../../res/wangEditor/wangEditor.min.js"></script>
+		<script src="../../res/user/js/write_notes.js"></script>
+	</body>
+</html>

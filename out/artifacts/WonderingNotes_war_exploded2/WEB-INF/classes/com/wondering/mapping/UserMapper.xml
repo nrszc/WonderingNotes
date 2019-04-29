@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wondering.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.wondering.pojo.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="follows" jdbcType="INTEGER" property="follows" />
+    <result column="articles" jdbcType="INTEGER" property="articles" />
+    <result column="fans" jdbcType="INTEGER" property="fans" />
+    <result column="music" jdbcType="VARCHAR" property="music" />
+    <result column="bgimg" jdbcType="VARCHAR" property="bgimg" />
+    <result column="signature" jdbcType="VARCHAR" property="signature" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, nickname, sex, avatar, create_time, update_time, status, birthday, province, 
+    city, area, address, follows, fans,articles, music, bgimg, signature
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wondering.pojo.User">
+    insert into tbl_user (id, nickname, sex, 
+      avatar, create_time, update_time, 
+      status, birthday, province, 
+      city, area, address, 
+      follows, fans,articles, music, bgimg, signature
+      )
+    values (#{id,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP},
+      #{status,jdbcType=TINYINT}, #{birthday,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{follows,jdbcType=INTEGER}, #{fans,jdbcType=INTEGER},#{articles,jdbcType=INTEGER}, #{music,jdbcType=VARCHAR}, #{bgimg,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wondering.pojo.User">
+    insert into tbl_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="update_time != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="follows != null">
+        follows,
+      </if>
+      <if test="fans != null">
+        fans,
+      </if>
+      <if test="articles != null">
+        articles,
+      </if>
+      <if test="music != null">
+        music,
+      </if>
+      <if test="bgimg != null">
+        bgimg,
+      </if>
+      <if test="signature != null">
+        signature,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null">
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="follows != null">
+        #{follows,jdbcType=INTEGER},
+      </if>
+      <if test="fans != null">
+        #{fans,jdbcType=INTEGER},
+      </if>
+      <if test="articles != null">
+        #{articles,jdbcType=INTEGER},
+      </if>
+      <if test="music != null">
+        #{music,jdbcType=VARCHAR},
+      </if>
+      <if test="bgimg != null">
+        #{bgimg,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null">
+        #{signature,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wondering.pojo.User">
+    update tbl_user
+    <set>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null">
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="follows != null">
+        follows = #{follows,jdbcType=INTEGER},
+      </if>
+      <if test="fans != null">
+        fans = #{fans,jdbcType=INTEGER},
+      </if>
+      <if test="articles != null">
+        articles = #{articles,jdbcType=INTEGER},
+      </if>
+      <if test="music != null">
+        music = #{music,jdbcType=VARCHAR},
+      </if>
+      <if test="bgimg != null">
+        bgimg = #{bgimg,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null">
+        signature = #{signature,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wondering.pojo.User">
+    update tbl_user
+    set nickname = #{nickname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      follows = #{follows,jdbcType=INTEGER},
+      fans = #{fans,jdbcType=INTEGER},
+      articles = #{articles,jdbcType=INTEGER},
+      music = #{music,jdbcType=VARCHAR}
+      bgimg = #{bgimg,jdbcType=VARCHAR}
+      signature = #{signature,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- 新增方法:检查nickname是否已被注册-->
+  <select id="checkNickName" resultType="int" >
+    select COUNT(1)
+    from tbl_user
+    where nickname = #{nickname}
+  </select>
+
+  <!--更新用户信息-->
+  <update id="Save" >
+    update tbl_user
+    set nickname=#{nickname}, city=#{city}, birthday=#{birthday}, sex=#{sex}, signature=#{signature}
+    where id = #{id}
+  </update>
+
+  <!--插入一条user信息后获取该user信息自增的id-->
+  <insert id="InsertUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.wondering.pojo.User">
+    insert into tbl_user(nickname, create_time, update_time) values(#{nickname}, now(), now())
+  </insert>
+
+  <!--user表articles+1-->
+  <update id="addUserArticlenum" >
+    update tbl_user
+    set articles = articles + 1
+    where id = #{user_id}
+  </update>
+
+  <!--更新封面图片-->
+  <update id="updateBgimg" >
+    update tbl_user
+    set bgimg = #{bgimg}
+    where id = #{user_id}
+  </update>
+
+  <!--更新头像-->
+  <update id="updateAvatar" >
+    update tbl_user
+    set avatar = #{avatar}
+    where id = #{user_id}
+  </update>
+
+  <!--更新音乐-->
+  <update id="updateMusic" >
+    update tbl_user
+    set music = #{music}
+    where id = #{user_id}
+  </update>
+
+  <!--更新签名-->
+  <update id="updateSignature" >
+    update tbl_user
+    set signature = #{signature}
+    where id = #{user_id}
+  </update>
+
+  <!--未登录状态找人-->
+  <select id="searchUserByWordNoLogin" resultType="com.wondering.vo.UserVO">
+    select id as user_id, sex,avatar, nickname, follows, fans, articles
+    from tbl_user
+    where status = 0 and nickname LIKE "%"#{search_word}"%"
+    order by (fans+follows) desc
+  </select>
+
+  <!--登录状态找人-->
+  <select id="searchUserByWordLogin" resultType="com.wondering.vo.UserVO">
+    select a.id as user_id,avatar, sex, nickname, follows, fans, articles,b.id as isfans
+    from (select * from tbl_user where status=0 and nickname like "%"#{search_word}"%") a LEFT JOIN (select * from tbl_user_fans where who_follow=#{user_id}) b
+    on a.id = b.follow_who
+    order by (a.fans+a.follows) desc
+  </select>
+
+  <!--增加粉丝数-->
+  <update id="addFans" >
+    update tbl_user
+    set fans = fans + 1
+    where id = #{follow_who}
+  </update>
+
+  <!--增加关注数-->
+  <update id="addFollows" >
+    update tbl_user
+    set follows = follows + 1
+    where id = #{who_follow}
+  </update>
+
+  <!--减去粉丝数-->
+  <update id="subFans" >
+    update tbl_user
+    set fans = fans - 1
+    where id = #{follow_who}
+  </update>
+
+  <!--减去关注数-->
+  <update id="subFollows" >
+    update tbl_user
+    set follows = follows - 1
+    where id = #{who_follow}
+  </update>
+
+
+
+</mapper>

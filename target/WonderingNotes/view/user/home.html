@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../res/layui/css/layui.css" />
+        <link rel="stylesheet" href="../../res/font-awesome/css/font-awesome.min.css" >
+        <link rel="stylesheet" href="../../res/user/css/home.css" />
+	</head>
+	<body>
+		
+		<div id="home" class="home-container">
+			<!--封面图-->
+			<div class="img-banner" v-if="user.bgimg==null||user.bgimg==''"  style="backgroundImage:url(../../res/user/images/page_bg.jpg)">
+				<div class="update-img" >
+						<input style="visibility:hidden; position:absolute;" name="file"  id="file" type="file" multiple />
+					    <button id="file_btn" class="layui-btn layui-btn-radius layui-btn-primary btn-style"><i class="fa fa-plus-circle fa-lg"></i>&nbsp;更改封面</button>
+				</div>
+			</div>
+
+			<div class="img-banner" v-else  :style="{backgroundImage:'url(' + user.bgimg + ')'}">
+				<div class="update-img" >
+					<input style="visibility:hidden; position:absolute;" name="file" v-on:change="ChangeFile"  id="file1" type="file" multiple />
+					<button v-on:click="ToChange" class="layui-btn layui-btn-radius layui-btn-primary btn-style"><i class="fa fa-plus-circle fa-lg"></i>&nbsp;更改封面</button>
+				</div>
+			</div>
+			
+			<!--个人主页内容-->
+			<div class="home-wrapper">
+
+				<!--个人信息div-->
+				<div class="side-bar">
+					<div class="wn-avatar">
+						<img v-if="user.avatar==null||user.avatar==''" src="../../res/user/images/avatar.png" height="120" width="120">
+						<img v-else :src="user.avatar" height="120" width="120">
+					</div>
+					<div class="wn-name">
+						{{user.nickname}}
+						<img v-if="user.sex==1" src="../../res/user/images/man.png" />
+						<img v-else-if="user.sex==2" src="../../res/user/images/woman.png" />
+					</div>
+					<!--<div class="wn-action">-->
+						<!--<button class="layui-btn layui-btn-sm wn-action-btn1"><i class="fa fa-plus-circle fa-lg"></i>&nbsp;关注</button>-->
+						<!--<button class="layui-btn layui-btn-sm wn-action-btn2">私信</button>-->
+					<!--</div>-->
+					<div class="profile">
+						<span v-if="user.signature==''||user.signature==null">您还没有个性签名，快来编辑您的个性签名吧</span>
+						<span v-else>{{user.signature}}</span>
+						<a id="edit" style="color: #5FB878;">编辑</a>
+					</div>
+					<div class="more">
+						<div class="nums">
+							<strong><a  v-on:click="getUserFollows()" >{{user.follows}}</a></strong>
+							<p>关注</p>
+						</div>
+						<div class="nums">
+							<strong><a  v-on:click="getUserFans()">{{user.fans}}</a></strong>
+							<p>粉丝</p>
+						</div>
+						<div class="nums">
+							<strong><a v-on:click="getUserArticle()">{{user.articles}}</a></strong>
+							<p>游记</p>
+						</div>
+					</div>
+					<div class="music-div">
+					    <audio class="wn-music" id="wn-music" :src="user.music" controls="controls">
+                                                                                    您的浏览器不支持播放
+                        </audio>
+                        <div class="upload-music">
+							     <input style="visibility:hidden; position:absolute;" name="music"  id="music" type="file"/>
+							     <a id="uploadmusic">上传</a>
+                        </div>
+                    </div>
+
+				</div>
+				<!--右边div-->
+				<div class="wn-content">
+				     <!--导航栏div-->
+				     <div class="nar-bar">
+					      <ul class="flt2">
+                               <li><a id="MN" v-on:click="getUserArticle()" class="tags_link link-active" title="我的游记">我的游记</a></li>
+                               <li><a id="MCN" v-on:click="getUserCollectArticle()" class="tags_link" title="我的收藏">我的收藏</a></li>
+							   <li><a id="MFans" v-on:click="getUserFans()" class="tags_link" title="我的粉丝">我的粉丝</a></li>
+							   <li><a id="MFollows" v-on:click="getUserFollows()" class="tags_link" title="我的关注">我的关注</a></li>
+                          </ul>
+
+				     </div>
+
+					<!--个人游记div-->
+				     <div class="content">
+
+                        <div id="show-article">
+				     	<div v-for="(art,index) in article" class="home-tn-item">
+                			<div class="home-tn-image">
+                				<a :href="'index.html?location=show_notes&articleid='+art.id+'&user_id='+art.user_id" target= _blank>
+                                <img class="" :src="art.title_img" style="display: inline;">                				</a>
+                			</div>
+                			<div class="home-tn-wrapper">
+                				<dl>
+                					<dt>
+                						<a :href="'index.html?location=show_notes&articleid='+art.id+'&user_id='+art.user_id" target= _blank>{{art.title}}</a>
+                                        <span>
+										<a v-on:click="moreopre(index)" style="display: inline-block; float: right;"><i class="fa fa-angle-down fa-lg"></i></a>
+										<ul :id="'more-opre'+index" class="more-opre">
+											<li class="mynotes">
+												<a v-on:click="DeleteArticle(art.id,index)">删除</a>
+											</li>
+                                            <li class="mycollectnotes">
+												<a v-on:click="CancelCollectArticle(art.id,index)">取消收藏</a>
+											</li>
+										</ul>
+                                        </span>
+                					</dt>
+                					<dd>
+                						<a :href="'index.html?location=show_notes&articleid='+art.id+'&user_id='+art.user_id" target= _blank>
+                						{{art.outline}}
+                					    </a>
+                					</dd>
+
+                				</dl>
+
+                				<div class="home-tn-extra">
+                					<span class="home-tn-place">
+										<a :href="'index.html?location=search_place&search_word='+art.city">
+											<i class="fa fa-map-marker fa-lg"></i>&nbsp;{{art.city}}
+										</a>
+									</span>
+									<span class="home-tn-user">
+										<a :href="'index.html?location=user&user_id='+art.user_id">
+											<i class="fa fa-user-circle-o fa-lg"></i>&nbsp;{{art.nickname}}
+										</a>
+									</span>
+									<span class="home-tn-like" >
+										<span v-if="art.isfavor==null||art.isfavor==''">
+											    <a v-on:click="tofavor(art.id,index)" style="color: #5FB878;"> <i  class="fa fa-thumbs-o-up fa-lg"></i>({{art.favor}})</a>
+											</span>
+											<span v-else >
+                                                <a v-on:click="cancelfavor(art.id,index)" style="color: #5FB878;"><i  class="fa fa-thumbs-up fa-lg" ></i>({{art.favor}})</a>
+											</span>
+									</span>
+									<span class="home-tn-comment" >
+										<a href="index.html?location=show_notes&position=comment" style="color: #5FB878;">
+											<i class="fa fa-commenting-o fa-lg"></i>({{art.comment}})
+										</a>
+									</span>
+                				</div>
+                			</div>
+                		</div>
+                	    </div>
+                	
+                	    <div style="display: none;" id="show-user" class="show-user">
+                		<div v-for="(item,index) in users" class="user-item">
+
+				            <div class="user-info">
+					            <a class="user-avatar" :href="'index.html?location=user&user_id='+item.user_id">
+						          <img v-if="item.avatar==null||item.avatar==''" src="../../res/user/images/avatar.png"/>
+						          <img v-else :src="item.avatar"/>
+					            </a>
+					           <div class="user-more">
+						          <div class="user-nickname">
+						           	 <span><a :href="'index.html?location=user&user_id='+item.user_id">{{item.nickname}}</a></span>
+							         <span v-if="item.sex==1" class="span-img"><img src="../../res/user/images/man.png" /></span>
+							         <span v-else-if="item.sex==2"class="span-img" ><img src="../../res/user/images/woman.png" /></span>
+						          </div>
+						          <div class="user-news">
+							         <span class=""><a :href="'index.html?location=user&user_id='+item.user_id" target= _blank>游记：{{item.articles}}</a></span>
+							         <span class=""><a :href="'index.html?location=user&user_id='+item.user_id" target= _blank>关注：{{item.follows}}</a></span>
+							         <span class=""><a :href="'index.html?location=user&user_id='+item.user_id" target= _blank>粉丝：{{item.fans}}</a></span>
+						          </div>
+					           </div>
+				            </div>
+
+				            <div class="user-oper">
+				            	<button v-if="item.isfans" v-on:click="CancelFollow(item.user_id,index)" class="layui-btn layui-btn-sm"  style="background-color: #F1F7ED; color: #666;">&nbsp;取消关注</button>
+                                <button id="noi" v-else v-on:click="ToFollow(item.user_id ,index)" class="layui-btn layui-btn-sm wn-action-btn1" ><i class="fa fa-plus-circle fa-lg"></i>&nbsp;关注</button>
+                               <button v-on:click="ToMsg(item.user_id)" class="layui-btn layui-btn-sm wn-action-btn2">私信</button>
+				            </div>
+
+			            </div>
+			            </div>
+
+                		
+					     <div id="page"></div>
+                         <div id="page1"></div>
+                         <div id="page2"></div>
+                         <div id="page3"></div>
+				     </div>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		
+		
+		<script src="../../res/common/js/jquery.min.js"></script>
+
+		<script src="../../res/user/js/home.js"></script>
+	</body>
+</html>

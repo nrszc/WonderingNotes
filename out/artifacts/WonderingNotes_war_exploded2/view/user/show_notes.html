@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../res/layui/css/layui.css" />
+        <link rel="stylesheet" href="../../res/font-awesome/css/font-awesome.min.css" >
+        <link rel="stylesheet" href="../../res/emoji/css/emojionearea.css">
+        <link rel="stylesheet" href="../../res/user/css/show_notes.css" />
+		<link rel="stylesheet" href="../../res/common/dist/css/share.min.css" />
+	</head>
+	<body>
+		<div id="wn-container" class="wn-container">
+			<!--游记头图-->
+			<div class="img-banner"  :style="{backgroundImage:'url(' + article.title_img + ')'}">
+				<div class="update-img">
+				</div>
+			</div>
+			
+			<!--头部-->
+			<div class="view-title">
+				<div class="title-wrapper">
+				<div class="person">
+					<a target="_blank" :href="'index.html?location=user&user_id='+article.user_id" class="per-avatar">
+						<img v-if="article.avatar==null||article.avatar==''" src="../../res/user/images/avatar.png" height="100" width="100">
+						<img v-else :src="article.avatar" height="100" width="100">
+					</a>
+					<a target="_blank" :href="'index.html?location=user&user_id='+article.user_id" class="nickname">
+						<span>{{article.nickname}}</span>
+					</a>
+					<a class="follows">
+						<span>
+							<template v-if="isfans">
+							   <button v-on:click="CancelFollow(article.user_id)"  class="layui-btn layui-btn-sm"  style="background-color: #F1F7ED; color: #666;">&nbsp;取消关注</button>
+						    </template>
+							<template v-else>
+								<button v-on:click="ToFollow(article.user_id) " class="layui-btn layui-btn-sm wn-action-btn1" ><i class="fa fa-plus-circle fa-lg"></i>&nbsp;关注</button>
+					        </template>
+						</span>
+					</a>
+					<span class="createtime">
+						<span>
+						{{article.create_time}}
+						</span>
+					</span>
+				</div>
+				<div class="operate">
+					<div class="operate-wrapper">
+					<a href="#comment-floor">
+					   <span class="comment"><i class="fa fa-commenting-o"></i>&nbsp;({{article.comment}})</span>
+					</a>
+					<a>
+					   <span class="like"><i class="fa fa-thumbs-o-up"></i>&nbsp;({{article.favor}})<i style="display: none;" class="fa fa-thumbs-up"></i></span>
+					</a>
+					<a>
+					   <span class="collect">
+						   <i v-if="iscollect" v-on:click="CancelCollect(article.id)" class="fa fa-star" ></i>
+						   <i v-else  v-on:click="ToCollect(article.id)" class="fa fa-star-o"></i>
+					   </span>
+					</a>
+					<a>
+					   <span class="share"><i class="fa fa-share-square-o"></i></span>
+						<div id="share" ></div>
+					   <!--<div class="share-choose">-->
+			              <!--<a class="share-qq" title="QQ"></a>-->
+			              <!--<a class="share-qqzone" title="QQ空间"></a>-->
+			              <!--<a class="share-wechat" title="微信"></a>-->
+			              <!--<a class="share-friend" title="朋友圈"></a>-->
+			              <!--<a class="share-weibo" title="微博"></a>-->
+                       <!--</div>-->
+				    </a>
+				    </div>
+				</div>
+				</div>
+			</div>
+			
+			<!--评论楼层-->
+			<div id="comment-floor" class="comment-floor">
+
+				<div class="show-note">
+					<p class="title"><strong>{{article.title}}</strong></p>
+					<div class="article-show">
+						<span v-html="article.article"></span>
+					</div>
+				</div>
+				
+				<div class="comment-item">
+					<div class="comment-avatar">
+					   <a href="#">
+					   	 <img src="http://n1-q.mafengwo.net/s8/M00/67/32/wKgBpVXflXSAa0l-AAYolyC1kXE72.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90" width="48" height="48" alt="小西畅游">
+					   </a>
+					</div>
+					<div class="comment-div">
+						<div class="main-comment">
+							<span class="comment-name">哈sky:</span>
+							<span class="comments">真的贼鸡儿棒棒棒的
+								这个没有特别规定 一般G层指最低端的层站 有的电梯厂家也会用其他字母来表示如 F或者其他字母. P一般指基站 消防动作后电梯只降落到基站 而不是最低站 正常情...
+								这个没有特别规定 一般G层指最低端的层站 有的电梯厂家也会用其他字母来表示如 F或者其他字母. P一般指基站 消防动作后电梯只降落到基站 而不是最低站 正常情...
+							</span>
+							<div class="comment-related">
+								<span class="comment-time">1月31日 19:44</span>
+								<div class="comment-feedback">
+								    <a>
+								       <span class="comment-report">举报</span>
+								    </a>
+								    <a class="comment-reply-a">
+								       <span class="comment-reply">回复</span>
+								    </a>
+								    <a>
+								        <span class="comment-like"><i class="fa fa-thumbs-o-up"></i>&nbsp;(233)<i style="display: none;" class="fa fa-thumbs-up"></i></span>
+								    </a>
+								</div>
+							</div>
+						</div>
+					   <div class="more-comment">
+						  <span class="watch-more-comment">共66条回复&nbsp;&nbsp;<a href="#">查看回复</a></span>
+						  <div class="more-comment-item">
+						  	  <span class="comment-name">哈sky:</span>
+							  <span class="comments">真的贼鸡儿棒棒棒的
+								这个没有特别规定 一般G层指最低端的层站 有的电梯厂家也会用其他字母来表示如 F或者其他字母. P一般指基站 消防动作后电梯只降落到基站 而不是最低站 正常情...
+								这个没有特别规定 一般G层指最低端的层站 有的电梯厂家也会用其他字母来表示如 F或者其他字母. P一般指基站 消防动作后电梯只降落到基站 而不是最低站 正常情...
+							  </span>
+							  <div class="comment-related">
+								<span class="comment-time">1月31日 19:44</span>
+								<div class="comment-feedback">
+								    <a>
+								       <span class="comment-report">举报</span>
+								    </a>
+								    <a class="comment-reply-a">
+								       <span class="comment-reply">回复</span>
+								    </a>
+								    <a>
+								        <span class="comment-like"><i class="fa fa-thumbs-o-up"></i>&nbsp;(233)<i style="display: none;" class="fa fa-thumbs-up"></i></span>
+								    </a>
+								</div>
+							</div>
+						  </div>
+						  <div class="more-comment-item">
+						  	  <span class="comment-name">哈sky:</span>
+							  <span class="comments">真的贼鸡儿棒棒棒的
+								这个没有特别规定 一般G层指最低端的层站 有的电梯厂家也会用其他字母来表示如 F或者其他字母. P一般指基站 消防动作后电梯只降落到基站 而不是最低站 正常情...
+								这个没有特别规定 一般G层指最低端的层站 有的电梯厂家也会用其他字母来表示如 F或者其他字母. P一般指基站 消防动作后电梯只降落到基站 而不是最低站 正常情...
+							  </span>
+							  <div class="comment-related">
+								<span class="comment-time">1月31日 19:44</span>
+								<div class="comment-feedback">
+								    <a>
+								       <span class="comment-report">举报</span>
+								    </a>
+								    <a class="comment-reply-a">
+								       <span class="comment-reply">回复</span>
+								    </a>
+								    <a>
+								        <span class="comment-like"><i class="fa fa-thumbs-o-up"></i>&nbsp;(233)<i style="display: none;" class="fa fa-thumbs-up"></i></span>
+								    </a>
+								</div>
+							</div>
+						  </div>
+					   </div>
+					</div>
+				</div>
+				
+				<div class="comment-item">
+					<div class="comment-avatar">
+					   <a href="#">
+					   	 <img src="http://n1-q.mafengwo.net/s8/M00/67/32/wKgBpVXflXSAa0l-AAYolyC1kXE72.jpeg?imageMogr2%2Fthumbnail%2F%2148x48r%2Fgravity%2FCenter%2Fcrop%2F%2148x48%2Fquality%2F90" width="48" height="48" alt="小西畅游">
+					   </a>
+					</div>
+					<div class="comment-div">
+						<div class="main-comment">
+							<span class="comment-name">哈sky:</span>
+							<span class="comments">真的贼鸡儿棒棒棒的
+								这个没有特别规定 一般G层指最低端的层站 有的电梯厂家也会用其他字母来表示如 F或者其他字母. P一般指基站 消防动作后电梯只降落到基站 而不是最低站 正常情...
+								这个没有特别规定 一般G层指最低端的层站 有的电梯厂家也会用其他字母来表示如 F或者其他字母. P一般指基站 消防动作后电梯只降落到基站 而不是最低站 正常情...
+							</span>
+							<div class="comment-related">
+								<span class="comment-time">1月31日 19:44</span>
+								<div class="comment-feedback">
+								    <a>
+								       <span class="comment-report">举报</span>
+								    </a>
+								    <a class="comment-reply-a">
+								       <span class="comment-reply">回复</span>
+								    </a>
+								    <a>
+								        <span class="comment-like"><i class="fa fa-thumbs-o-up"></i>&nbsp;(233)<i style="display: none;" class="fa fa-thumbs-up"></i></span>
+								    </a>
+								</div>
+							</div>
+						</div>
+					   <div class="more-comment">
+						  <span class="watch-more-comment">共66条回复&nbsp;&nbsp;<a href="#">查看回复</a></span>
+						  <div class="more-comment-item">
+						  	  <span class="comment-name">哈sky:</span>
+							  <span class="comments">真的贼鸡儿棒棒棒的
+								这个没有特别规定 一般G层指最低端的层站 有的电梯厂家也会用其他字母来表示如 F或者其他字母. P一般指基站 消防动作后电梯只降落到基站 而不是最低站 正常情...
+								这个没有特别规定 一般G层指最低端的层站 有的电梯厂家也会用其他字母来表示如 F或者其他字母. P一般指基站 消防动作后电梯只降落到基站 而不是最低站 正常情...
+							  </span>
+							  <div class="comment-related">
+								<span class="comment-time">1月31日 19:44</span>
+								<div class="comment-feedback">
+								    <a>
+								       <span class="comment-report">举报</span>
+								    </a>
+								    <a class="comment-reply-a">
+								       <span class="comment-reply">回复</span>
+								    </a>
+								    <a>
+								        <span class="comment-like"><i class="fa fa-thumbs-o-up"></i>&nbsp;(233)<i style="display: none;" class="fa fa-thumbs-up"></i></span>
+								    </a>
+								</div>
+							</div>
+						  </div>
+					   </div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<!--评论框-->
+			<div class="comment-area">
+				<div class="comment-textarea">
+					 <textarea id="example1"></textarea>  
+				</div>
+				<button class="layui-btn layui-btn-sm submit-btn">提交评论</button>
+			</div>
+		
+		
+			
+	    </div>
+		
+		
+		
+		<script src="../../res/common/js/jquery.min.js"></script>
+		<script src="../../res/common/js/social-share.js"></script>
+		<script src="../../res/common/js/qrcode.js"></script>
+		<script src="../../res/emoji/js/emojionearea.js"></script>
+		<script src="../../res/user/js/show_notes.js"></script>
+		<script>
+            socialShare('#share', {sites: ['qzone', 'qq', 'weibo','wechat']});
+		</script>
+	</body>
+</html>

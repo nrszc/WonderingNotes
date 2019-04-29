@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>流浪记</title>
+    <link rel="icon" href="../../res/user/images/logo2.png">
+    <link rel="stylesheet" href="../../res/layui/css/layui.css" />
+    <link rel="stylesheet" href="../../res/font-awesome/css/font-awesome.min.css" >
+    <link rel="stylesheet" href="../../res/user/css/index.css" />
+</head>
+<body>
+	<div id="main" class="container">
+      <div class="header">
+		  <div class="header-wrap">
+			<div class="logo">
+				<a class="wn-logo" href="index.html" title="流浪记"></a>
+			</div>
+			<ul class="head-nav ">
+				<li class="head-nav-index" style="color: #FFFFFF;">
+					<a id="a1" href="index.html" class="head-nav-active" >首页</a>
+				</li>
+			</ul>
+			<div class="head-search">
+			    <input type="text" id="search" name="search" placeholder="游记/游子/地点" style="width: 300px;" class="layui-input search-input">
+			    <button v-on:click="searchbyword" class="layui-btn search-btn"><i class="fa fa-search fa-lg"></i></button>
+			</div>
+			<div class="head-login">
+				<a href="login.html">登录</a>
+				<a href="index.html?location=regist">注册</a>
+			</div>
+			<div class="login-done">
+				<div class="head-msg">
+					<a href="index.html?location=news" target="_blank">消息&nbsp;<i class="fa fa-caret-down fa-lg"></i></a>
+				</div>
+			    <div class="head-avatar">
+			    	<a href="http://wsgzjh.cn/view/user/index.html?location=home">
+						<template v-if="user.avatar==null||user.avatar==''">
+				            <img src="../../res/user/images/avatar.png" /><i  class="fa fa-caret-down fa-lg myavatar"></i>
+						</template>
+						<template v-else>
+							<img :src="user.avatar" /><i  class="fa fa-caret-down fa-lg myavatar"></i>
+						</template>
+				    </a>
+			    </div>
+			</div>
+		  </div>
+		</div>
+		
+		<ul class="msg-ul">
+			<li><a href="index.html?location=news">私信</a></li>
+			<li><a href="index.html?location=news">评论</a></li>
+			<li><a href="index.html?location=news">赞</a></li>
+			<li><a href="index.html?location=news">系统通知</a></li>
+		</ul>
+		
+		<ul class="avatar-ul">
+			<li><a href="index.html?location=home">我的流浪记</a></li>
+			<li><a href="index.html?location=write_notes" target="_blank">写游记</a></li>
+			<li><a href="index.html?location=setting">完善资料</a></li>
+			<li v-if="identity_type==0||identity_type==1"><a href="index.html?location=updatepw1">修改密码</a></li>
+			<li><a href="index.html?location=home">我的游记</a></li>
+			<li><a href="index.html?location=home">我的关注</a></li>
+			<li><a href="index.html?location=home">我的粉丝</a></li>
+			<li><a v-on:click="logout">退出</a></li>
+		</ul>
+		
+		<!--主要内容-->
+		<div id="frame">
+			
+           
+		</div>
+		
+		<div class="footer">
+        	<div class="ft-content">
+        	    <div class="ft-copyright">
+        		    <span id="yyy">© 2018 wsgzjh.cn 京ICP备11015476号 京公网安备11010502013401号 京ICP证110318号违法和不良信息举报电话: 010-59222790 举报邮箱 wsgzjh@sina.com</span>
+        		    <span>网络出版服务许可证：(总)网出证(京)字第161号增值电信业务经营许可证：京B2-20180228 营业执照帮助中心流浪记客服：国内4006-345-678海外 +86-10-5922-2799</span>
+        	    </div>
+            </div>
+        </div>
+       </div>
+        <script src="../../res/common/js/jquery.min.js"></script>
+	    <script src="../../res/common/js/vue.min.js"></script>
+		<script src="../../res/user/js/index.js"></script>
+		<script src="../../res/layui/layui.js"></script>
+</body>
+</html>

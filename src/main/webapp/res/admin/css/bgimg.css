@@ -1,0 +1,67 @@
+.container{
+	width: 1200px;
+	min-height: 300px;
+	margin: 0 auto;
+}
+
+.div1 {
+	margin: 10px 0 0 30px;
+	position: relative;
+}
+
+.div2 {
+	width: 100px;
+	height: 36px;
+	background: #009688;
+	color: #ffffff;
+	text-align: center;
+	line-height: 36px;
+}
+
+.file_input {
+	width: 200px;/*因为file-input在部分浏览器中会自带一个输入框，需要双击才可以点击上传,放大后将其定位到div外面就好啦*/
+	height: 36px;
+	position: absolute;
+	left: -100px;
+	top: 0;
+	z-index:1;
+	-moz-opacity: 0;
+	-ms-opacity: 0;
+	-webkit-opacity: 0;
+	opacity: 0;  /*css属性——opcity不透明度，取值0-1*/
+	filter: alpha(opacity=0); /*兼容IE8及以下--filter属性是IE特有的，它还有很多其它滤镜效果，而filter: alpha(opacity=0); 兼容IE8及以下的IE浏览器(如果你的电脑IE是8以下的版本，使用某些效果是可能会有一个允许ActiveX的提示,注意点一下就ok啦)*/
+	cursor: pointer;
+}
+
+.img-box{
+	margin: 10px 20px;
+	overflow:hidden;
+}
+
+.img-div{
+	position:relative;
+	display: block;
+	float: left;
+}
+
+.img-box img{
+	cursor: pointer;
+	margin: 10px 10px;
+	width: 360px;
+	height: 240px;
+}
+
+img:hover {
+
+}
+
+.delete{
+	display: block;
+	width: 22px;
+    height: 22px;
+	position:absolute;
+	left:355px;
+	top:10px;
+    font-size: 22px;
+    cursor:pointer;
+}

@@ -1,0 +1,106 @@
+body{
+	font-family: Arial,"Lucida Grande","Microsoft Yahei","Hiragino Sans GB","Hiragino Sans GB W3",SimSun,"PingFang SC",STHeiti;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+a{
+	text-decoration: none;
+	cursor: pointer;
+}
+.like-box{
+	width:630px;
+	/*background-color: #D3D4D3;*/
+}
+
+.like-item{
+	padding-bottom: 10px;
+	border-bottom: 1px solid #F2F2F5;
+}
+
+.like-detail{
+	width: 100%;
+	overflow: hidden;　　　　　
+}
+
+.like-left{
+	float: left;
+	width: 100px;
+	min-height: 100px;
+	/*background-color: #007DDB;*/
+}
+
+.like-right{
+	float: right;
+	width: 525px;
+	/*background-color: #007DDB;*/
+}
+
+.like-left a{
+	display: block;
+	padding: 15px 35px 0;
+}
+
+.like-left a img{
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+}
+
+.like-nickname{
+	margin-bottom: 10px;
+	font-size: 14px;
+	padding-top: 15px;
+}
+
+.like-nickname span img{
+	width: 20px;
+	height: 20px;
+}
+
+.like-time {
+	font-size: 14px;
+	color: #808080;
+	margin-bottom: 10px;
+}
+
+.the-like{
+	color: #333;
+	margin-bottom: 10px;
+}
+
+.the-article{
+	width: 490px;
+	max-height: 40px;
+	line-height: 22px;
+	padding: 5px 16px;
+	background-color: #f2f2f5;
+	font-size: 13px;
+	overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+
+.choice{
+	margin:10px 0  0 40px;
+}
+
+.choice a{
+	color: #5FB878;
+}
+
+.emojione{
+	font-size: inherit;
+	height: 2ex;
+	width: 2.1ex;
+	min-height: 20px;
+	min-width: 20px;
+	display: inline-block;
+	margin: -.2ex .15em .2ex;
+	line-height: normal;
+	vertical-align: middle;
+	max-width: 100%;
+	top: 0;
+}

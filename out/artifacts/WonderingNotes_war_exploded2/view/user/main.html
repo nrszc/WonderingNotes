@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		    <link rel="stylesheet" href="../../res/layui/css/layui.css" />
+    <link rel="stylesheet" href="../../res/font-awesome/css/font-awesome.min.css" >
+    <link rel="stylesheet" href="../../res/user/css/index.css" />
+    <link rel="stylesheet" href="../../res/user/css/main.css" />
+	</head>
+	<body>
+		<div id="main-container" class="main-container">
+
+				<!--轮播图-->
+	            <div class="layui-carousel" id="test1">
+                   <div carousel-item="">
+                      <div v-for="item in carousel">
+                          <a  :href="'index.html?location=show_notes&articleid='+item.id+'&user_id'+item.user_id">
+                             <img :src="item.title_img" width="1000px" height="350px" />
+                          </a>
+                      </div>
+                   </div>
+                </div>
+
+                <div class="wn-wrapper">
+
+                	<div class="wn-nar">
+                		<ul class="tn-nar">
+                			<li class="tn-nar-all "><a class="tn-nar-active">热点游记</a></li>
+                			<li class="tn-nar-new"><a >最新游记</a></li>
+                			<li class="tn-nar-hot"><a >榜单</a></li>
+                		</ul>
+                		<div class="write-nar">
+                			<button type="button" class="layui-btn"><i class="fa fa-edit fa-lg"></i>&nbsp;&nbsp;写游记</button>
+                		</div>
+                	</div>
+
+                	<div class="wn-box">
+
+                		<div v-for="item in article" class="tn-item">
+                			<div class="tn-image">
+                				<a :href="'index.html?location=show_notes&articleid='+item.id+'&user_id='+item.user_id" target= _blank>
+                                <img class="" :src="item.title_img" style="display: inline;">                				</a>
+                			</div>
+                			<div class="tn-wrapper">
+                				<dl>
+                					<dt>
+                						<a :href="'index.html?location=show_notes&articleid='+item.id+'&user_id='+item.user_id" target= _blank>{{item.title}}</a>
+                					</dt>
+                					<dd>
+                						<a :href="'index.html?location=show_notes&articleid='+item.id+'&user_id='+item.user_id" target= _blank>
+                						{{item.outline}}
+                					    </a>
+                					</dd>
+
+                				</dl>
+
+                				<!--<div class="tn-extra">-->
+                					<!--<span class="tn-place"><a><i class="fa fa-map-marker fa-lg"></i>&nbsp;{{item.city}}</a></span>-->
+                					<!--<span class="tn-user"><a><i class="fa fa-user-circle-o fa-lg"></i>&nbsp;{{item.nickname}}</a></span>-->
+                					<!--<span class="tn-like"><a><i class="fa fa-thumbs-o-up fa-lg"></i>({{item.favor}})</a></span>-->
+                					<!--<span class="tn-comment"><a><i class="fa fa-commenting-o fa-lg"></i>(item.comment)</a></span>-->
+                					<!---->
+                				<!--</div>-->
+
+								<div class="tn-extra">
+                					<span class="tn-place">
+										<a :href="'index.html?location=search_place&search_word='+item.city">
+											<i class="fa fa-map-marker fa-lg"></i>&nbsp;{{item.city}}
+										</a>
+									</span>
+									<span class="tn-user">
+										<a :href="'index.html?location=user&user_id='+item.user_id">
+											<i class="fa fa-user-circle-o fa-lg"></i>&nbsp;{{item.nickname}}
+										</a>
+									</span>
+									<span class="tn-like">
+										<a >
+											<i class="fa fa-thumbs-o-up fa-lg"></i>({{item.favor}})
+										</a>
+									</span>
+									<span class="tn-comment">
+										<a href="index.html?location=show_notes&position=comment">
+											<i class="fa fa-commenting-o fa-lg"></i>({{item.comment}})
+										</a>
+									</span>
+
+								</div>
+
+                			</div>
+                		</div>
+
+
+
+
+                	</div>
+
+                </div>
+                
+                <div id="pagination"></div>
+			    <div style="display: none;" id="pagination1"></div>
+			    <div style="display: none;" id="pagination2"></div>
+           </div>
+           
+           <script src="../../res/common/js/jquery.min.js"></script>
+        <script src="../../res/user/js/main.js"></script>
+	</body>
+</html>

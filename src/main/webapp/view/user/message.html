@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../res/layui/css/layui.css" />
+    <link rel="stylesheet" href="../../res/user/css/message.css" />
+</head>
+<body>
+
+    <div class="msg-box" id="msg-box">
+        <div class="msg-div">
+            <div v-for="item in message" class="msg-item">
+                <div class="msg-time">
+                    {{item.create_time}}
+                </div>
+                <div class="msg-content">
+                    {{item.content}}
+                </div>
+            </div>
+            <div id="page" style="float:right;"></div>
+        </div>
+    </div>
+
+
+
+<script src="../../res/common/js/jquery.min.js"></script>
+<script src="../../res/common/js/vue.min.js"></script>
+<script src="../../res/user/js/message.js"></script>
+</body>
+</html>

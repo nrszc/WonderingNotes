@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Insert title here</title>
+</head>
+<body>
+
+请输入：<textarea rows="5" cols="10" id="inputMsg" name="inputMsg"></textarea>
+<button onclick="doSend();">发送</button>
+
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdn.bootcss.com/sockjs-client/1.1.1/sockjs.js"></script>
+
+<script type="text/javascript">
+    var websocket = null;
+    if ('WebSocket' in window) {
+        websocket = new WebSocket("ws://wsgzjh.cn/websocket/socketServer");
+    }
+    else if ('MozWebSocket' in window) {
+        websocket = new MozWebSocket("ws://wsgzjh.cn/websocket/socketServer");
+    }
+    else {
+        websocket = new SockJS("http://wsgzjh.cn/sockjs/socketServer");
+    }
+    websocket.onopen = onOpen;
+    websocket.onmessage = onMessage;
+    websocket.onerror = onError;
+    websocket.onclose = onClose;
+
+    function onOpen(openEvt) {
+        //alert(openEvt.Data);
+    }
+
+    function onMessage(evt) {
+        alert(evt.data);
+    }
+    function onError() {}
+    function onClose() {}
+
+    function doSend() {
+        if (websocket.readyState == websocket.OPEN) {
+            var msg = document.getElementById("inputMsg").value;
+            let obj = {};
+            obj.nickname = 'jinkkkk';
+            obj.id = 12;
+            //websocket.send(msg);//调用后台handleTextMessage方法
+            websocket.send(JSON.stringify(obj));
+            alert("发送成功!");
+        } else {
+            alert("连接失败!");
+        }
+    }
+    window.close=function()
+    {
+        websocket.onclose();
+    }
+
+</script>
+</body>
+</html>

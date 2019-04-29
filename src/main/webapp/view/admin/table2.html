@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../../res/admin/lib/layui/css/layui.css">
+    <link rel="stylesheet" href="../../res/admin/css/table.css" />
+</head>
+<body >
+<div class="table-container" id="report">
+    <div>
+
+    </div>
+    <form class="layui-form">
+        <div class="div-opre">
+            <div class="btn-opre">
+                <button type="button" v-on:click="reportpass" class="layui-btn">通&nbsp;&nbsp;过</button>
+            </div>
+            <div class="time-search">
+                <select name="status" id="status" style="display: inline-block; width: 90px; height: 35px;">
+                    <option value="-1">所有</option>
+                    <option value="0">正常</option>
+                    <option value="1">违规</option>
+                </select>
+                <input type="text" class="layui-input" style="display: inline-block; width: 200px;" id="date1"> -
+                <input type="text" class="layui-input" style="display: inline-block; width: 200px;" id="date2">
+                <button type="button" v-on:click="searchreport" class="layui-btn">查&nbsp;&nbsp;询</button>
+            </div>
+        </div>
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th><input style="display: block; width: 20px; height: 20px;" type="checkbox" id="selectAll"  /></th>
+                <th>举报人</th>
+                <th>举报评论</th>
+                <th>作者</th>
+                <th>举报时间</th>
+                <th>状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(item, index) in rep">
+                <td width="5%"><input style="display: block; width: 20px; height: 20px;" type="checkbox" name="check" :value="item.id"  ></td>
+                <td width="10%"><a :href="'http://wsgzjh.cn/view/user/index.html?location=user&user_id='+item.reuser_id" target="_blank">{{item.renickname}}</a></td>
+                <td width="55%">{{item.content}}</td>
+                <td width="10%"><a :href="'http://wsgzjh.cn/view/user/index.html?location=user&user_id='+item.user_id" target="_blank">{{item.nickname}}</a></td>
+                <td width="15%">{{item.create_time}}</td>
+                <td width="5%">
+                    <template v-if="item.status==0">正常</template>
+                    <template v-if="item.status==1">违规</template>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </form>
+    <div style="display: none;" class="page" id="page"></div>
+    <div style="display: none;" class="page" id="page1"></div>
+</div>
+<script src="../../res/common/js/jquery.min.js"></script>
+<script src="../../res/common/js/vue.min.js"></script>
+<script src="../../res/admin/lib/layui/layui.js"></script>
+<script src="../../res/admin/js/table2.js"></script>
+
+</body>
+</html>

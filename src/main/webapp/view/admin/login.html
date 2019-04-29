@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>流浪记</title>
+    <link rel="icon" href="../../res/user/images/logo2.png">
+    <link rel="stylesheet" href="../../res/layui/css/layui.css" />
+    <link rel="stylesheet" href="../../res/font-awesome/css/font-awesome.min.css" >
+    <link rel="stylesheet" href="../../res/admin/css/login.css" />
+</head>
+<body>
+
+<div id="container">
+    <div></div>
+    <div class="admin-login-background">
+        <!--<div class="admin-header">-->
+        <!--<img src="image/ex_logo.png" class="admin-logo">-->
+        <!--</div>-->
+        <form class="layui-form" action="">
+            <div>
+                <i class="layui-icon layui-icon-username admin-icon admin-icon-username"></i>
+                <input type="text" name="name" placeholder="请输入用户名" id="name"
+                       autocomplete="off"
+                       class="layui-input admin-input admin-input-username">
+            </div>
+            <div>
+                <i class="layui-icon layui-icon-password admin-icon admin-icon-password"></i>
+                <input type="password" name="password" id="password"
+                       placeholder="请输入密码"
+                       autocomplete="off"
+                       class="layui-input admin-input">
+            </div>
+            <div>
+                <input type="text" name="verify" id="verify"
+                       placeholder="请输入验证码"
+                       class="layui-input admin-input admin-input-verify">
+                <div class="admin-captcha" id="v_container" style="width: 100px;height: 50px;"></div>
+            </div>
+            <button type="button" id="loginbtn" class="layui-btn admin-button" >登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;陆</button>
+        </form>
+    </div>
+</div>
+
+
+
+    <script src="../../res/common/js/jquery.min.js"></script>
+    <script src="../../res/common/js/vue.min.js"></script>
+    <script src="../../res/layui/layui.js"></script>
+    <script src="../../res/admin/js/gVerify.js"></script>
+    <script src="../../res/admin/js/login.js"></script>
+
+</body>
+</html>

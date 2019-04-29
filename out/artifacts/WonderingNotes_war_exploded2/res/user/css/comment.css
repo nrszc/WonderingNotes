@@ -1,0 +1,83 @@
+body{
+	font-family: Arial,"Lucida Grande","Microsoft Yahei","Hiragino Sans GB","Hiragino Sans GB W3",SimSun,"PingFang SC",STHeiti;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+a{
+	text-decoration: none;
+	cursor: pointer;
+}
+.comment-box{
+	width:630px;
+	/*background-color: #D3D4D3;*/
+}
+
+.comment-item{
+	padding-bottom: 10px;
+	border-bottom: 1px solid #F2F2F5;
+}
+
+.comment-detail{
+	width: 100%;
+	overflow: hidden;　　　　　　　　/*对超出容器的部分强制截取，高度不确定则换行*/
+}
+
+.comment-left{
+	float: left;
+	width: 100px;
+	min-height: 100px;
+	/*background-color: #007DDB;*/
+}
+
+.comment-right{
+	float: right;
+	width: 525px;
+	/*background-color: #007DDB;*/
+}
+
+.comment-left a{
+	display: block;
+	padding: 15px 35px 0;
+}
+
+.comment-left a img{
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+}
+
+.comment-nickname{
+	margin-bottom: 10px;
+	font-size: 14px;
+	padding-top: 15px;
+}
+
+.comment-nickname span img{
+	width: 20px;
+	height: 20px;
+}
+
+.comment-time {
+	font-size: 14px;
+	color: #808080;
+	margin-bottom: 10px;
+}
+
+.the-comment{
+	color: #333;
+	margin-bottom: 10px;
+}
+
+.the-article{
+	width: 490px;
+	max-height: 40px;
+	line-height: 22px;
+	padding: 5px 16px;
+	background-color: #f2f2f5;
+	font-size: 13px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../res/layui/css/layui.css" />
+        <link rel="stylesheet" href="../../res/font-awesome/css/font-awesome.min.css" >
+         <link rel="stylesheet" href="../../res/user/css/setting.css" />
+	</head>
+	<body>
+		
+        <div id="setting" class="setting-container">
+        	
+        	<div class="setting-box">
+        		<form class="layui-form" action="">
+  <div class="img-avatar">
+  	<span class="avatar-title">头像</span>
+  	<span class="avatar-img">
+  		<a href="index.html?location=avatar" target="_blank">
+  			<img v-if="user.avatar==null||user.avatar==''" src="../../res/user/images/avatar.png"/>
+            <img v-else :src="user.avatar"/>
+  		</a>
+  	</span>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">昵称</label>
+    <div class="layui-input-block">
+      <input type="text" v-on:blur="CheckNickname" v-on:keyup.tab="CheckNickname" @ style="width: 250px;" v-model="user.nickname" id="nickname" name="nickname" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">性别</label>
+    <div class="layui-input-block">
+      <input type="radio" name="sex" v-model="user.sex" value="1" title="男">
+      <input type="radio" name="sex" v-model="user.sex" value="2" title="女">
+      <input type="radio" name="sex" v-model="user.sex" value="0" title="保密">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">城市</label>
+    <div class="layui-input-block">
+      <input type="text" style="width: 250px;" v-model="user.city" id="city" name="city" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">出生日期</label>
+
+      <input type="date" style="width: 250px;" v-model="user.birthday" id="birthday" name="birthday" class="layui-input">
+
+  </div>
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">个性签名</label>
+    <div class="layui-input-block">
+      <textarea name="signature" v-model="user.signature" id="signature" class="layui-textarea"></textarea>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button type="button" v-on:click="Save" class="layui-btn" >保存</button>
+    </div>
+  </div>
+</form>
+        	</div>
+        	
+        </div>
+
+		<script src="../../res/common/js/jquery.min.js"></script>
+		<script src="../../res/user/js/setting.js"></script>
+
+	</body>
+</html>

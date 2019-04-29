@@ -1,0 +1,24 @@
+.msg-box{
+    width: 630px;
+}
+
+.msg-div{
+    width: 550px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.msg-item{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #F2F2F5
+}
+
+.msg-time{
+    margin: 5px 0;
+    font-size: 14px;
+    color: #808080;
+}
+
+.msg-content{
+    color: #333;
+}

@@ -1,0 +1,53 @@
+body{
+	font-family: Arial,"Lucida Grande","Microsoft Yahei","Hiragino Sans GB","Hiragino Sans GB W3",SimSun,"PingFang SC",STHeiti;
+	margin: 0;
+	padding: 0;
+}
+
+a{
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.WN-frame{
+	width: 800px;
+	margin: 0 auto;
+	overflow: hidden;　　　　　　　　/*对超出容器的部分强制截取，高度不确定则换行*/
+}
+
+.WN-main-news{
+	width: 150px;
+	border: 1px solid #E8E7E3;
+	float: left;
+}
+
+.main-box{
+	
+}
+
+.main-box a{
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 30px;
+}
+
+.main-box a:hover{
+	background-color: #5FB878;
+}
+.news-box{
+	font-size: 18px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	background-color: #E8E7E3;
+}
+
+.main-active{
+	background-color: #5FB878;
+}
+
+.WN-news-show{
+	float: right;
+	width: 640px;
+}

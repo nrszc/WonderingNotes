@@ -1,0 +1,333 @@
+body{
+	margin: 0;
+	padding: 0;
+	font-family: Arial,"Lucida Grande","Microsoft Yahei","Hiragino Sans GB","Hiragino Sans GB W3",SimSun,"PingFang SC",STHeiti;
+}
+
+a{
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.wn-container{
+	min-height: 100%;
+	border: 0px;
+}
+
+.img-banner{
+	width: 100%;
+	height: 450px;
+	background-size:100% 100%;
+	background-repeat: no-repeat;
+	background-position: center 0;
+	background: url(https://n1-q.mafengwo.net/s11/M00/D4/FA/wKgBEFxRewiAD5_gAAONyZXt0lE80.jpeg?imageMogr2%2Finterlace%2F1);
+}
+
+.view-title{
+	height: 100px;
+    border-bottom: 1px solid #d7d7d7;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.05);
+    position: relative;
+    z-index: 16;
+}
+
+.title-wrapper{
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.view-title .person{
+	float: left;
+	width: 600px;
+	font-size: 14px;
+}
+
+.person a .per-avatar{
+	width: 100px;
+    height: 100px;
+    z-index: 88;
+}
+
+.person a img{
+	border-radius: 50%;
+}
+
+.nickname{
+	color: #5FB878;
+}
+
+.nickname span{
+	margin: 0 10px;
+}
+
+.nickname span:hover{
+	color: #5FB878;
+}
+
+.follows span{
+	margin-right: 10px;
+}
+
+.createtime span{
+	color: #acacac;
+}
+
+.operate{
+	font-size: 25px;
+	float: right;
+	width: 400px;
+	height: 100px;
+}
+
+.operate-wrapper{
+	margin: 33px 0;
+	height: 30px;
+}
+.operate .comment{
+	margin-left: 20px;
+	color: #5FB878;
+}
+
+.operate .like{
+	margin-left: 20px;
+	color: #5FB878;
+}
+
+.operate .share{
+	margin-left: 20px;
+	color: #A2C64A;
+}
+
+.operate .collect{
+	margin-left: 20px;
+	color: #1492E3;
+}
+
+.wn-wrapper{
+	margin: 0 auto;
+	padding-bottom: 20px;
+	width: 1000px;
+	border-bottom: 1px solid #d7d7d7;
+}
+
+
+.comment-area{
+	padding-top: 20px;
+	margin: 0 auto;
+	width: 1000px;
+}
+
+.submit-btn{
+	float: right;
+	margin-top: 10px;
+	font-size: 16px;
+}
+
+.comment-floor{
+	margin: 0 auto;
+	padding-bottom: 20px;
+	width: 1000px;
+	min-height: 100%;
+	border-bottom: 1px solid #d7d7d7;
+	overflow:hidden;
+}
+
+.comment-item{
+	width: 100%;
+	min-height: 100%;
+    font-size: 14px;
+    margin-bottom: 10px;
+    overflow:hidden;
+}
+
+.comment-item .comment-avatar{
+	padding-top: 10px;
+	margin-left: 30px;
+	width: 50px;
+    height: 48px;
+    float: left;
+    position: relative;
+}
+
+.comment-item .comment-avatar img{
+	display: block;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%
+}
+
+.comment-item .comment-div{
+	margin-right: 30px;
+	width:850px;
+	float: right;
+}
+
+.main-comment{
+	padding: 10px 0;
+}
+.comment-name{
+	color: #5FB878;
+}
+
+.reply-name{
+	color: #999;
+}
+
+.comment-main{
+	min-height: 30px;
+}
+
+.comment-related{
+	width: 100%;
+	padding-top:5px;
+	font-size: 13px;
+	overflow:hidden;
+}
+
+.comment-related .comment-time{
+	color: #80809E;
+	font-size: 12px;
+}
+
+.comment-related .comment-feedback{
+	float: right;
+	width: 170px;
+}
+
+.comment-div .more-comment{
+	margin-left: 15px;
+	padding-top: 2px ;
+	background-color: #F2F2F5;
+}
+
+.more-comment .watch-more-comment a{
+	color: #5FB878;
+}
+
+.comment-report{
+	padding-right: 10px;
+}
+
+.comment-reply{
+	padding-right: 10px;
+}
+
+.comment-like{
+	color: #5FB878;
+}
+
+.watch-more-comment{
+
+}
+
+.more-comment-item{
+	margin: 5px ;
+	min-height: 30px;
+	border-bottom: 1px solid #D9D9D9;
+}
+
+#share{
+	display: none;
+	position: relative;
+	top: 0px;
+	left: 180px;
+	width: 168px;
+}
+
+.share-choose{
+	display: none;
+	position: relative;
+	top: 39px;
+	left: 200px;
+	background-color: #FFFFFF;
+	width: 250px;
+	height: 50px;
+	padding-left: 15px;
+	padding-top: 10px;
+	border: 1px solid #d7d7d7;
+	border-radius: 7px;
+}
+
+.share-qq{
+	display: inline-block;
+	background: url(../images/share-qq.png) no-repeat;
+	width: 40px;
+	height: 40px;
+	background-size:100%;
+}
+
+.share-qqzone{
+	display: inline-block;
+	background: url(../images/share-qqzone.png) no-repeat;
+	width: 40px;
+	height: 40px;
+	background-size:100%;
+}
+
+.share-wechat{
+	display: inline-block;
+	background: url(../images/share-wechat.png) no-repeat;
+	width: 40px;
+	height: 40px;
+	background-size:100%;
+}
+
+.share-friend{
+	display: inline-block;
+	background: url(../images/share-friend.png) no-repeat;
+	width: 40px;
+	height: 40px;
+	background-size:100%;
+}
+
+.share-weibo{
+	display: inline-block;
+	background: url(../images/share-weibo.png) no-repeat;
+	width: 40px;
+	height: 40px;
+	background-size:100%;
+}
+
+.show-note{
+	width: 750px;
+	margin: 0 auto;
+	padding: 40px 0;
+}
+
+.article-show{
+	padding-top: 40px;
+}
+
+.title{
+	font-size: 25px;
+	text-align: center;
+}
+
+.change{
+	margin-bottom: 20px;
+}
+
+.change a{
+	display: block;
+	float: right;
+	margin-right: 40px;
+	color: #5FB878;
+}
+
+.hot{
+	display: none;
+}
+
+.emojione{
+	font-size: inherit;
+	height: 2ex;
+	width: 2.1ex;
+	min-height: 20px;
+	min-width: 20px;
+	display: inline-block;
+	margin: -.2ex .15em .2ex;
+	line-height: normal;
+	vertical-align: middle;
+	max-width: 100%;
+	top: 0;
+}

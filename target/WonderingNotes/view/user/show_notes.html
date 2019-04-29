@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../res/layui/css/layui.css" />
+        <link rel="stylesheet" href="../../res/font-awesome/css/font-awesome.min.css" >
+        <link rel="stylesheet" href="../../res/emoji/css/emojionearea.css">
+        <link rel="stylesheet" href="../../res/user/css/show_notes.css" />
+		<link rel="stylesheet" href="../../res/common/dist/css/share.min.css" />
+	</head>
+	<body>
+		<div id="wn-container" class="wn-container">
+			<!--游记头图-->
+			<div class="img-banner"  :style="{backgroundImage:'url(' + article.title_img + ')'}">
+				<div class="update-img">
+				</div>
+			</div>
+			
+			<!--头部-->
+			<div class="view-title">
+				<div class="title-wrapper">
+				<div class="person">
+					<a target="_blank" :href="'index.html?location=user&user_id='+article.user_id" class="per-avatar">
+						<img v-if="article.avatar==null||article.avatar==''" src="../../res/user/images/avatar.png" height="100" width="100">
+						<img v-else :src="article.avatar" height="100" width="100">
+					</a>
+					<a target="_blank" :href="'index.html?location=user&user_id='+article.user_id" class="nickname">
+						<span>{{article.nickname}}</span>
+					</a>
+					<a class="follows">
+						<span>
+							<template v-if="isfans">
+							   <button v-on:click="CancelFollow(article.user_id)"  class="layui-btn layui-btn-sm"  style="background-color: #F1F7ED; color: #666;">&nbsp;取消关注</button>
+						    </template>
+							<template v-else>
+								<button v-on:click="ToFollow(article.user_id) " class="layui-btn layui-btn-sm wn-action-btn1" ><i class="fa fa-plus-circle fa-lg"></i>&nbsp;关注</button>
+					        </template>
+						</span>
+					</a>
+					<span class="createtime">
+						<span>
+						{{article.create_time}}
+						</span>
+					</span>
+				</div>
+				<div class="operate">
+					<div class="operate-wrapper">
+						<a v-on:click="articlereport(article.id)" title="举报">
+							<span class="comment"><i class="fa fa-warning"></i></span>
+						</a>
+					<a href="#comment-floor">
+					   <span class="comment"><i class="fa fa-commenting-o"></i>&nbsp;({{article.comment}})</span>
+					</a>
+					<a>
+					   <span class="like">
+						   <span  v-if="article.isfavor==null||article.isfavor==''" v-on:click="tofavor(article.id)">
+						       <i class="fa fa-thumbs-o-up"></i>&nbsp;({{article.favor}})
+						   </span>
+						   <span v-else  v-on:click="cancelfavor(article.id)">
+						       <i class="fa fa-thumbs-up"></i>&nbsp;({{article.favor}})
+						   </span>
+					   </span>
+					</a>
+					<a>
+					   <span class="collect">
+						   <i v-if="iscollect" v-on:click="CancelCollect(article.id)" class="fa fa-star" ></i>
+						   <i v-else  v-on:click="ToCollect(article.id)" class="fa fa-star-o"></i>
+					   </span>
+					</a>
+					<a>
+					   <span class="share"><i class="fa fa-share-square-o"></i></span>
+						<div id="share" ></div>
+					   <!--<div class="share-choose">-->
+			              <!--<a class="share-qq" title="QQ"></a>-->
+			              <!--<a class="share-qqzone" title="QQ空间"></a>-->
+			              <!--<a class="share-wechat" title="微信"></a>-->
+			              <!--<a class="share-friend" title="朋友圈"></a>-->
+			              <!--<a class="share-weibo" title="微博"></a>-->
+                       <!--</div>-->
+				    </a>
+				    </div>
+				</div>
+				</div>
+			</div>
+			
+			<!--评论楼层-->
+			<div id="comment-floor" class="comment-floor">
+
+				<div class="show-note">
+					<p class="title"><strong>{{article.title}}</strong></p>
+					<div class="article-show">
+						<span v-html="article.article"></span>
+					</div>
+				</div>
+
+				<div class="change">
+                     <a class="new" v-on:click="newcomment(article.id)">查看最新评论</a>
+					 <a class="hot" v-on:click="hotcomment(article.id)">查看热门评论</a>
+				</div>
+				
+				<div v-for="(item,index) in comment" class="comment-item">
+					<div class="comment-avatar">
+					   <a :href="'index.html?location=user&user_id='+item.user_id" target="_blank">
+					   	 <img :src="item.avatar" width="48" height="48" >
+					   </a>
+					</div>
+					<div class="comment-div">
+						<div class="main-comment">
+							<div class="comment-main">
+							<span style="cursor: pointer;" v-on:click="clickuser(item.user_id)" class="comment-name">{{item.nickname}}:</span>
+							<span class="comments">{{item.content}}</span>
+							</div>
+							<div class="comment-related">
+								<span class="comment-time">{{item.create_time}}</span>
+								<div class="comment-feedback">
+								    <a v-on:click="commentreport(item.id)">
+								       <span class="comment-report">举报</span>
+								    </a>
+								    <a class="comment-reply-a" v-on:click="toreply(item.id, item.nickname, item.user_id)">
+								       <span class="comment-reply">回复</span>
+								    </a>
+								    <span class="comment-like">
+										<span style="cursor: pointer" v-if="item.isfavor==null||item.isfavor==''" v-on:click="tofavorcomment(item.id, index)">
+										<i class="fa fa-thumbs-o-up"></i>&nbsp;({{item.favor}})
+										</span>
+										<span  style="cursor: pointer" v-else v-on:click="cancelfavorcomment(item.id, index)">
+										<i class="fa fa-thumbs-up"></i>&nbsp;({{item.favor}})
+										</span>
+									</span>
+								</div>
+							</div>
+						</div>
+					   <div v-if="item.comment>0" class="more-comment">
+						   <template v-if="!item.isshow">
+						      <span class="watch-more-comment">共{{item.comment}}条回复&nbsp;&nbsp;<a v-on:click="getreply(item.id,index)">查看回复</a></span>
+						   </template>
+						   <template v-if="item.isshow" >
+						  <div v-for="(comments, i) in item.comments" class="more-comment-item">
+						  	  <span style="cursor: pointer;" v-on:click="clickuser(comments.user_id)" class="comment-name">{{comments.nickname}}:</span>
+							  <span class="reply-name">回复&nbsp;{{comments.reply}}:{{comments.replyname}}</span>
+							  <span class="comments">
+								 {{comments.content}}
+							  </span>
+							  <div class="comment-related">
+								<span class="comment-time">{{comments.create_time}}</span>
+								<div class="comment-feedback">
+								    <a v-on:click="commentcommentreport(comments.id)">
+								       <span class="comment-report">举报</span>
+								    </a>
+								    <a class="comment-reply-a">
+								       <span class="comment-reply" v-on:click="toreply(item.id, comments.nickname, comments.user_id)">回复</span>
+								    </a>
+								</div>
+							</div>
+						  </div>
+						   </template>
+					   </div>
+					</div>
+				</div>
+
+					<div id="mynewcomment" style="display: none;">
+
+					</div>
+
+
+				<div id="pagination"></div>
+				<div style="display: none;" id="pagination1"></div>
+				
+			</div>
+			
+			<!--评论框-->
+			<div class="comment-area">
+				<div class="comment-textarea">
+					 <textarea id="example1" style="width: 1000px; height:100px;"></textarea>
+				</div>
+				<button v-on:click="tocomment(article.id)" class="layui-btn layui-btn-sm submit-btn">提交评论</button>
+			</div>
+		
+		
+			
+	    </div>
+		
+		
+		
+		<script src="../../res/common/js/jquery.min.js"></script>
+		<script src="../../res/common/js/social-share.js"></script>
+		<script src="../../res/common/js/qrcode.js"></script>
+		<script src="../../res/user/js/show_notes.js"></script>
+		<script>
+            socialShare('#share', {sites: ['qzone', 'qq', 'weibo','wechat']});
+		</script>
+	</body>
+</html>

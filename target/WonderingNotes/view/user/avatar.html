@@ -1,0 +1,189 @@
+<!doctype html>
+<meta charset="utf-8">
+<html lang="zh-CN">
+<head>
+    <title>image-clipper</title>
+    <style>
+        body{
+            background-color: #FFFFFF;
+        }
+        .avatar-container{
+        	margin: 20px auto 0;
+	        width: 700px;
+	        min-height: 100%;
+	        background-color: #5FB878;
+	        overflow: hidden;
+        }
+        .cut-avatar{
+        	float: left;
+        	width: 400px;
+        }
+        #clipper-container{
+            height: 500px;
+            width: 400px;
+             max-width: 100%;
+            position: relative;
+        }
+        .cut-btn{
+        	width: 360px;
+        	margin: 10px auto 0;
+        }
+        .show-avatar{
+        	width: 250px;
+        	float: right;
+        	height: 550px;
+        	
+        }
+        #result-circle1{
+        	margin-top: 10px;
+        	width: 200px;
+        	height: 200px;
+        	border-radius: 50%
+        }
+         #result-circle2{
+         	margin-top: 10px;
+         	margin-left: 25px;
+        	width: 150px;
+        	height: 150px;
+        	border-radius: 50%
+        }
+         #result-circle3{
+         	margin-top: 10px;
+         	margin-left: 50px;
+        	width: 100px;
+        	height: 100px;
+        	border-radius: 50%
+        }
+        img{
+            border: solid brown 1px;
+        }
+        #result-circle{
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+	<div class="avatar-container">
+		
+        <div class="cut-avatar">
+			<div id="clipper-container"></div>
+			<div class="cut-btn">
+				<input id="file" type="file" >
+				<p>
+					<br>
+				<button id="clockwise" class="layui-btn">左旋转</button>
+				<button id="anticlockwise" class="layui-btn">右旋转</button>
+				<button id="clip" class="layui-btn">剪切</button>
+				<button id="uploadavatar" class="layui-btn">确认头像</button>
+				</p>
+			</div>
+		</div>
+		
+		<div class="show-avatar">
+			<img id="result-circle1" src="" alt="" />
+		    <img id="result-circle2" src="" alt="" />
+            <img id="result-circle3" src="" alt="" />		
+		</div>
+    
+    </div>
+    <script src="../../res/common/js/jquery.min.js"></script>
+	<script src="../../res/common/js/vue.min.js"></script>
+    <script src="../../res/common/js/Clipper.js"></script>
+    <script src="../../res/common/js/stats.min.js"></script>
+    <script>
+		var avatar = "";
+        //layui需引入，一般直接写在一个js文件中
+        var layer;
+        layui.use(['layer', 'form'], function(){
+            layer = layui.layer
+                ,form = layui.form;
+        });
+      (function () {
+        /*
+        * start.js
+        * */
+        let stats = new Stats()
+        stats.showPanel(0)
+        document.body.appendChild(stats.dom)
+        /*
+        * demo by vincent lau
+        * */
+        let container = document.getElementById('clipper-container')
+        document.body.onload = function () {
+          let clipper = new Clipper(container, {
+            coverShape: 'circle',
+            coverColor: '#000000',
+            coverSize: 0.8,
+            coverOpacity: 0.4,
+            beforeAF () {
+              stats.begin()
+            },
+            afterAF () {
+              stats.end()
+            }
+          })
+          document.getElementById('file').onchange = function (event) {
+            let fileReader = new FileReader()
+            fileReader.onload = function (e) {
+              clipper.drawImg(e.target.result)
+            }
+            fileReader.readAsDataURL(event.target.files[0])
+          }
+          //rotate
+          document.getElementById('clockwise').onclick = function () {
+            clipper.nextRotation -= 0.1
+          }
+          document.getElementById('anticlockwise').onclick = function () {
+            clipper.nextRotation += 0.1
+          }
+          // clip
+          document.getElementById('clip').onclick = function () {
+            clipper.clip(function (data) {
+//                    toBlob
+//                    let fileReader = new FileReader()
+//                    fileReader.onload = function (e) {
+//                        document.getElementById('result').src = e.target.result
+//                    }
+//                    fileReader.readAsDataURL(data)
+				avatar = data;
+              document.getElementById('result-circle1').src = data
+              document.getElementById('result-circle2').src = data
+              document.getElementById('result-circle3').src = data
+            }, {
+              format: 'base64'
+            })
+          }
+        }
+      })()
+        $("#uploadavatar").click(function(){
+            if(avatar.length == 0) {
+                layer.msg("请上传或剪切图片");
+                return;
+            }
+            var formData = new FormData();
+            console.log(sessionStorage.getItem("user_id"));
+            formData.append("avatar", dataURLtoFile(avatar,sessionStorage.getItem("user_id")+".png"));
+            $.ajax({
+                url: "/user/update_avatar",
+                data: formData,
+                type: 'post',
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    console.log(res);
+					layer.msg(res.msg);
+                }
+            });
+        });
+
+        function dataURLtoFile(dataurl, filename) {//将base64转换为文件
+            var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+                bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+            while(n--){
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new File([u8arr], filename, {type:mime});
+        }
+    </script>
+</body>
+</html>

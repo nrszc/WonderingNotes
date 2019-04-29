@@ -1,0 +1,78 @@
+body{
+	font-family: Arial,"Lucida Grande","Microsoft Yahei","Hiragino Sans GB","Hiragino Sans GB W3",SimSun,"PingFang SC",STHeiti;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+a{
+	text-decoration: none;
+	cursor: pointer;
+	color: #333;
+}
+
+.letter-item{
+	height: 80px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.letter-box :hover{
+    background-color: #F2F2F5;
+}
+
+.letter-box{
+	width: 640px;
+}
+
+.letter-left{
+	float: left;
+	width: 85px;
+}
+
+.letter-left a{
+	display: block;
+	padding: 10px 0 0 10px;
+}
+
+.letter-left a img{
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+}
+
+.letter-right{
+	width: 555px;
+	float: right;
+}
+
+.letter-up{
+	height: 20px;
+	padding: 15px 0 0 0;
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+.letter-nickname{
+	float: left;
+}
+
+.letter-nickname a:hover{
+	color: #5FB878;
+}
+
+.letter-time{
+	color: #808080;
+	padding-right: 10px;
+	float: right;
+	font-size: 13px;
+}
+
+.letter-down{
+	color: #808080;
+	padding-right: 10px;
+	height: 20px;
+	overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}

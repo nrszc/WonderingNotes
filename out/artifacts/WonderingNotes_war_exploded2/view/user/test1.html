@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>君乐科技js分享代码</title>
+</head>
+<body style="background:#e5e6e6;">
+<section>
+    <div>
+    <div class="share-box">
+        <div>
+            <p>点击下方图标直接分享</p>       
+            <ul>
+                <!-- 新浪微博 -->
+                <li><a href="javascript:;"  class="invite-kinds2">新浪微博</a></li>
+                <!-- QQ好友 -->
+                <li><a href="javascript:;"  id="qq_id" target="_blank">QQ好友</a></li>
+                <!-- QQ空间 -->
+                <li><a href="javascript:;"  onclick = "qqZone()">QQ空间</a></li>
+                <!-- 腾讯微博 -->
+                <li><a href="javascript:;"  onclick = "tencentWeiBo()">腾讯微博</a></li>
+            </ul>
+        </div>
+        <div class="ewm" id="qrcode"></div>
+        <!-- 参考:jquery.qrcode.js -->
+    </div>
+    </div>
+</section>
+<hr>
+<h3>直接使用百度分享</h3>
+<div class="bdsharebuttonbox">
+	<a href="#" class="bds_more" data-cmd="more"></a>
+	<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+	<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+</div>
+<script>
+window._bd_share_config={
+	"common":{
+		"bdSnsKey":{},
+	    "bdText":"",
+	    "bdMini":"2",
+	    "bdMiniList":false,
+	    "bdPic":"",
+	    "bdStyle":"0",
+	    "bdSize":"32"
+	},
+	"share":{},
+	"image":{
+		"viewList":["weixin","tsina","qzone","tqq"],
+		"viewText":"分享到：",
+		"viewSize":"16"
+		},
+	"selectShare":{
+		"bdContainerClass":null,
+		"bdSelectMiniList":["weixin","tsina","qzone","tqq"]
+		}
+	};
+	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<script>
+  var url = "http://www.junlenet.com";
+    var desc_ = "君乐科技";      
+    function tencentWeiBo(){
+         var _url = "http://www.junlenet.com";   
+         var _showcount = 0;
+         var _summary = "";
+         var _title = desc_;
+         var _site = "http://www.junlenet.com";  
+         var _width = "600px";
+         var _height = "800px";
+         var _pic = "http://www.junlenet.com/uploads/allimg/150510/1-150510104044.jpg";
+         var _shareUrl = 'http://share.v.t.qq.com/index.php?c=share&a=index';
+         _shareUrl += '&title=' + encodeURIComponent(_title||document.title);    //分享的标题
+         _shareUrl += '&url=' + encodeURIComponent(_url||location.href);    //分享的链接
+         _shareUrl += '&appkey=5bd32d6f1dff4725ba40338b233ff155';    //在腾迅微博平台创建应用获取微博AppKey
+         //_shareUrl += '&site=' + encodeURIComponent(_site||'');   //分享来源
+         _shareUrl += '&pic=' + encodeURIComponent(_pic||'');    //分享的图片，如果是多张图片，则定义var _pic='图片url1|图片url2|图片url3....'
+         window.open(_shareUrl,'width='+_width+',height='+_height+',left='+(screen.width-_width)/2+',top='+(screen.height-_height)/2+',toolbar=no,menubar=no,scrollbars=no,resizable=1,location=no,status=0');
+    }    
+    var top = window.screen.height / 2 - 250;  
+    var left = window.screen.width / 2 - 300;  
+    var height = window.screen.height;
+    var width =  window.screen.width; 
+    /*title是标题，rLink链接，summary内容，site分享来源，pic分享图片路径,分享到新浪微博*/  
+    function shareTSina() {  
+        var title = desc_;
+        var   rLink = "http://www.junlenet.com";
+        var backUrl = "http://wx.hengfu100.com/member/c_friend";
+        var site = desc_;
+        var pic = "http://www.junlenet.com/uploads/allimg/150510/1-150510104044.jpg";
+        window.open("http://service.weibo.com/share/share.php?pic=" +encodeURIComponent(pic) +"&title=" +   
+        encodeURIComponent(title.replace(/ /g, " ").replace(/<br \/>/g, " "))+ "&url=" + encodeURIComponent(rLink),  
+        "分享至新浪微博",  
+        "height=500,width=600,top=" + top + ",left=" + left + ",toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no");  
+    }  
+  
+     function qqFriend() {
+            var p = {
+                url : 'http://www.junlenet.com', /*获取URL，可加上来自分享到QQ标识，方便统计*/
+                desc:'',
+                //title : '新玩法，再不来你就out了！', /*分享标题(可选)*/
+                title:desc_,
+                summary : '', /*分享摘要(可选)*/
+                pics : 'http://www.junlenet.com/uploads/allimg/150510/1-150510104044.jpg', /*分享图片(可选)*/
+                flash : '', /*视频地址(可选)*/
+                site : 'http://www.junlenet.com', /*分享来源(可选) 如：QQ分享*/
+                style : '201',
+                width : 32,
+                height : 32
+            };
+            var s = [];
+            for ( var i in p) {
+                s.push(i + '=' + encodeURIComponent(p[i] || ''));
+            }
+            var url = "http://connect.qq.com/widget/shareqq/index.html?"+s.join('&');
+            return url;
+            //window.location.href = url;
+            //document.write(['<a class="qcShareQQDiv" href="http://connect.qq.com/widget/shareqq/index.html?',s.join('&'), '" >分享给QQ好友</a>' ].join(''));
+        }
+    
+    function qqZone(){
+         var _url = "http://www.junlenet.com";   
+         var _showcount = 0;
+         var _desc = desc_;
+         var _summary = "";
+         var _title = "君乐科技";
+         var _site = "";
+         var _width = "600px";
+         var _height = "800px";
+         var _summary = "";
+         var _pic = "http://www.junlenet.com/uploads/allimg/150510/1-150510104044.jpg";
+         var _shareUrl = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?';
+         _shareUrl += 'url=' + encodeURIComponent(_url||document.location);   //参数url设置分享的内容链接|默认当前页location
+         _shareUrl += '&showcount=' + _showcount||0;      //参数showcount是否显示分享总数,显示：'1'，不显示：'0'，默认不显示
+         _shareUrl += '&desc=' + encodeURIComponent(_desc||'分享的描述');    //参数desc设置分享的描述，可选参数
+         //_shareUrl += '&summary=' + encodeURIComponent(_summary||'分享摘要');    //参数summary设置分享摘要，可选参数
+         _shareUrl += '&title=' + encodeURIComponent(_title||document.title);    //参数title设置分享标题，可选参数
+         //_shareUrl += '&site=' + encodeURIComponent(_site||'');   //参数site设置分享来源，可选参数
+         _shareUrl += '&pics=' + encodeURIComponent(_pic||'');   //参数pics设置分享图片的路径，多张图片以＂|＂隔开，可选参数
+        window.open(_shareUrl,'width='+_width+',height='+_height+',top='+(screen.height-_height)/2+',left='+(screen.width-_width)/2+',toolbar=no,menubar=no,scrollbars=no,resizable=1,location=no,status=0'); 
+    }
+    
+     $(function(){   
+        var url = qqFriend();
+        $("#qq_id").attr("href",url);    
+     })
+</script>
+</body>
+</html>

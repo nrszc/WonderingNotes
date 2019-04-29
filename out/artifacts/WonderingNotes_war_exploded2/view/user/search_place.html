@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../res/layui/css/layui.css" />
+        <link rel="stylesheet" href="../../res/font-awesome/css/font-awesome.min.css" >
+        <link rel="stylesheet" href="../../res/user/css/search_title.css" />
+	</head>
+	<body>
+
+	<div id="search1">
+
+		<div class="nav-container">
+			<div class="nav-list">
+				<div class="nav-list">
+					<a :href="'index.html?location=search_title&search_word='+search_word" class="list-item ">
+						标题
+					</a>
+					<a :href="'index.html?location=search_place&search_word='+search_word" class="list-item list-item-active">
+						地点
+					</a>
+					<a :href="'index.html?location=search_user&search_word='+search_word" class="list-item">
+						找人
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="search-container">
+			<div v-for="item in article" class="wn-box">
+				<div class="tn-item">
+					<div class="tn-image">
+						<a :href="'index.html?location=show_notes&articleid='+item.id+'&user_id='+item.user_id" target= _blank>
+							<img class="" :src="item.title_img" style="display: inline;">
+						</a>
+					</div>
+					<div class="tn-wrapper">
+						<dl>
+							<dt>
+								<a :href="'index.html?location=show_notes&articleid='+item.id+'&user_id='+item.user_id" target= _blank>{{item.title}}</a>
+							</dt>
+							<dd>
+								<a :href="'index.html?location=show_notes&articleid='+item.id+'&user_id='+item.user_id" target= _blank>
+									{{item.outline}}
+								</a>
+							</dd>
+
+						</dl>
+
+						<div class="tn-extra">
+                					<span class="tn-place">
+										<a target= _blank :href="'index.html?location=search_place&search_word='+item.city">
+											<i class="fa fa-map-marker fa-lg"></i>&nbsp;{{item.city}}
+										</a>
+									</span>
+							<span class="tn-user">
+										<a target= _blank :href="'index.html?location=user&user_id='+item.user_id">
+											<i class="fa fa-user-circle-o fa-lg"></i>&nbsp;{{item.nickname}}
+										</a>
+									</span>
+							<span class="tn-like">
+										<a target= _blank >
+											<i class="fa fa-thumbs-o-up fa-lg"></i>({{item.favor}})
+										</a>
+									</span>
+							<span class="tn-comment">
+										<a target= _blank href="index.html?location=show_notes&position=comment">
+											<i class="fa fa-commenting-o fa-lg"></i>({{item.comment}})
+										</a>
+									</span>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="pagination"></div>
+
+		</div>
+	</div>
+		<script src="../../res/common/js/jquery.min.js"></script>
+        <script src="../../res/user/js/search_place.js"></script>
+	</body>
+</html>

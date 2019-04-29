@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wondering.dao.ReportMapper">
+  <resultMap id="BaseResultMap" type="com.wondering.pojo.Report">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="article_id" jdbcType="INTEGER" property="article_id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="check_time" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, article_id, create_time, check_time, status, user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_article_report
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_article_report
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wondering.pojo.Report">
+    insert into tbl_article_report (id, article_id, create_time, 
+      check_time, status, user_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{article_id,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, 
+      #{check_time,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{user_id,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wondering.pojo.Report">
+    insert into tbl_article_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="article_id != null">
+        article_id,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="check_time != null">
+        check_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="user_id != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="article_id != null">
+        #{article_id,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="check_time != null">
+        #{check_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wondering.pojo.Report">
+    update tbl_article_report
+    <set>
+      <if test="article_id != null">
+        article_id = #{article_id,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="check_time != null">
+        check_time = #{check_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wondering.pojo.Report">
+    update tbl_article_report
+    set article_id = #{article_id,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      check_time = #{check_time,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      user_id = #{user_id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--插入一条ArticleReport信息-->
+  <insert id="ArticleReport" parameterType="com.wondering.pojo.Report">
+    insert into tbl_article_report (user_id,  create_time, article_id)
+    values (#{user_id}, now(), #{article_id})
+  </insert>
+
+  <!--插入一条CommentReport信息-->
+  <insert id="CommentReport" parameterType="com.wondering.pojo.CommentReport">
+    insert into tbl_article_comment_report (user_id,  create_time, comment_id)
+    values (#{user_id}, now(), #{comment_id})
+  </insert>
+
+  <!--插入一条CommentCommentReport信息-->
+  <insert id="CommentCommentReport" parameterType="com.wondering.pojo.CommentCommentReport">
+    insert into tbl_article_comment_comment_report (user_id,  create_time, cc_id)
+    values (#{user_id}, now(), #{cc_id})
+  </insert>
+
+  <!--文章评论-->
+  <select id="ArticleComment" resultType="com.wondering.vo.Comment">
+    select b.title,b.id article_id, d.id Auser_id, d.nickname Anickname, c.content Acontent,
+    c.create_time, a.id Buser_id, a.nickname Bnickname, a.avatar Bavatar, a.sex Bsex
+    from tbl_user a, tbl_article b, tbl_article_comment c, tbl_user d
+    where b.user_id = #{user_id} and b.status = 0
+    and c.status = 0  and b.id = c.article_id and c.user_id = a.id and b.user_id = d.id
+    order by create_time desc
+  </select>
+
+  <!--评论评论-->
+  <select id="CommentComment" resultType="com.wondering.vo.Comment">
+   select a.id Buser_id, a.nickname Bnickname, a.avatar Bavatar, a.sex Bsex, b.id comment_id, b.content Bcontent, c.create_time,
+   c.content Acontent, d.id Auser_id,d.nickname Anickname
+   from tbl_user a, tbl_article_comment b, tbl_article_comment_comment c, tbl_user d
+   where c.status = 0 and c.user_id = a.id and c.comment_id = b.id and b.user_id = d.id
+   and b.status = 0 and c.reply_id = #{user_id}
+   order by create_time desc
+  </select>
+
+  <!--文章点赞-->
+  <select id="ArticleFavor" resultType="com.wondering.vo.Favor">
+    select a.nickname Anickname, a.id Auser_id, b.title, b.id article_id, c.avatar Bavatar,
+    c.id Buser_id, c.sex Bsex, c.nickname Bnickname, d.create_time
+    from tbl_user a, tbl_article b, tbl_user c, tbl_article_favor d
+    where b.status = 0 and b.user_id = #{user_id} and b.user_id = a.id
+    and b.id = d.article_id and d.user_id = c.id
+    order by create_time desc
+  </select>
+
+  <!--文章点赞-->
+  <select id="CommentFavor" resultType="com.wondering.vo.Favor">
+    select a.nickname Anickname, a.id Auser_id, b.content, b.id comment_id, d.avatar Bavatar,
+    d.id Buser_id, d.sex Bsex, d.nickname Bnickname, c.create_time
+    from tbl_user a, tbl_article_comment b, tbl_article_comment_favor c, tbl_user d
+    where b.user_id = #{user_id} and b.status = 0 and b.user_id = a.id and b.id = c.comment_id and c.user_id = d.id
+    order by create_time desc
+  </select>
+
+
+  <!--admin-->
+
+  <!--获取游记举报-->
+  <select id="GetReportNotes" resultType="com.wondering.vo.ReportVO">
+    select a.id, a.article_id, c.`status`, a.user_id as reuser_id,b.nickname as renickname,c.title, a.create_time,c.user_id ,d.nickname
+    from tbl_article_report a, tbl_user b, tbl_article c, tbl_user d
+    where a.user_id = b.id and a.article_id = c.id and c.user_id = d.id
+    order by a.create_time desc
+  </select>
+
+  <!--获取评论举报-->
+  <select id="GetReportComments" resultType="com.wondering.vo.ReportVO">
+    select a.id, a.comment_id, c.`status`, a.user_id as reuser_id,b.nickname as renickname,c.content, a.create_time,c.user_id ,d.nickname
+    from tbl_article_comment_report a, tbl_user b, tbl_article_comment c, tbl_user d
+    where a.user_id = b.id and a.comment_id = c.id and c.user_id = d.id
+    order by a.create_time desc
+  </select>
+
+  <!--批量审批-->
+  <update id="UpdateReport" parameterType="int">
+    update tbl_article_report a, tbl_article b
+    set a.status = 1, check_time = now(), b.status = 1
+    WHERE a.article_id = b.id and a.id IN
+    <foreach item="idArray" collection="array" open="(" separator="," close=")">
+      #{idArray}
+    </foreach>
+  </update>
+
+
+  <!--获取游记举报-->
+  <select id="SearchReport" resultType="com.wondering.vo.ReportVO">
+    select a.id, a.article_id, c.`status`, a.user_id as reuser_id,b.nickname as renickname,c.title, a.create_time,c.user_id ,d.nickname
+    from tbl_article_report a, tbl_user b, tbl_article c, tbl_user d
+    where a.user_id = b.id and a.article_id = c.id and c.user_id = d.id
+    <if test="status != -1 ">
+      and c.status = #{status}
+    </if>
+    <if test="date1 != null and '' != date1 ">
+      and a.create_time>=#{date1}
+    </if>
+    <if test="date2 != null and '' != date2 ">
+      and #{date2}>=a.create_time
+    </if>
+    order by a.create_time desc
+  </select>
+
+  <!--批量审批-->
+  <update id="UpdateCReport" parameterType="int">
+    update tbl_article_comment_report a, tbl_article_comment b
+    set a.status = 1, check_time = now(), b.status = 1
+    WHERE a.comment_id = b.id and a.id IN
+    <foreach item="idArray" collection="array" open="(" separator="," close=")">
+      #{idArray}
+    </foreach>
+  </update>
+
+
+  <!--获取一级评论举报-->
+  <select id="SearchCReport" resultType="com.wondering.vo.ReportVO">
+    select a.id, a.comment_id, c.`status`, a.user_id as reuser_id,b.nickname as renickname,c.content, a.create_time,c.user_id ,d.nickname
+    from tbl_article_comment_report a, tbl_user b, tbl_article_comment c, tbl_user d
+    where a.user_id = b.id and a.comment_id = c.id and c.user_id = d.id
+    <if test="status != -1 ">
+      and c.status = #{status}
+    </if>
+    <if test="date1 != null and '' != date1 ">
+      and a.create_time>=#{date1}
+    </if>
+    <if test="date2 != null and '' != date2 ">
+      and #{date2}>=a.create_time
+    </if>
+    order by a.create_time desc
+  </select>
+
+  <!--获取二级评论举报-->
+  <select id="GetReportCC" resultType="com.wondering.vo.ReportVO">
+    select a.id, a.cc_id as comment_id, c.`status`, a.user_id as reuser_id,b.nickname as renickname,c.content, a.create_time,c.user_id ,d.nickname
+    from tbl_article_comment_comment_report a, tbl_user b, tbl_article_comment_comment c, tbl_user d
+    where a.user_id = b.id and a.cc_id = c.id and c.user_id = d.id
+    order by a.create_time desc
+  </select>
+
+  <!--批量审批-->
+  <update id="UpdateCCReport" parameterType="int">
+    update tbl_article_comment_comment_report a, tbl_article_comment_comment b
+    set a.status = 1, check_time = now(), b.status = 1
+    WHERE a.cc_id = b.id and a.id IN
+    <foreach item="idArray" collection="array" open="(" separator="," close=")">
+      #{idArray}
+    </foreach>
+  </update>
+
+  <!--获取二级评论举报-->
+  <select id="SearchCCReport" resultType="com.wondering.vo.ReportVO">
+    select a.id, a.cc_id as comment_id, c.`status`, a.user_id as reuser_id,b.nickname as renickname,c.content, a.create_time,c.user_id ,d.nickname
+    from tbl_article_comment_comment_report a, tbl_user b, tbl_article_comment_comment c, tbl_user d
+    where a.user_id = b.id and a.cc_id = c.id and c.user_id = d.id
+    <if test="status != -1 ">
+      and c.status = #{status}
+    </if>
+    <if test="date1 != null and '' != date1 ">
+      and a.create_time>=#{date1}
+    </if>
+    <if test="date2 != null and '' != date2 ">
+      and #{date2}>=a.create_time
+    </if>
+    order by a.create_time desc
+  </select>
+</mapper>
